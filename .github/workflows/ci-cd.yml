@@ -33,7 +33,7 @@ jobs:
 
       - name: Upload build artifacts
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-files
           path: |
@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build-files
           path: .
