@@ -13,7 +13,7 @@ export default function StatsBar() {
 			<div className='max-w-7xl mx-auto px-6'>
 				<div className='grid grid-cols-2 md:grid-cols-4 gap-10 text-center text-white'>
 					{stats.map(({ icon: Icon, value, label }) => (
-						<div key={label}>
+						<div key={label} className="transition-all duration-500 ease-in-out hover:scale-105">
 							<div className='flex justify-center mb-3'>
 								<Icon className='w-10 h-10 text-red-200' />
 							</div>

@@ -6,7 +6,7 @@ export default function MissionVision() {
 		<section className='py-20 bg-gray-50'>
 			<div className='max-w-7xl mx-auto px-6'>
 				<div className='grid lg:grid-cols-2 gap-12'>
-					<Card className='bg-white border-0 shadow-xl rounded-3xl p-10 hover:shadow-2xl transition-shadow'>
+					<Card className='bg-white border-0 shadow-xl rounded-3xl p-10 hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-1'>
 						<div className='bg-[#F9D0D9] w-16 h-16 rounded-2xl flex items-center justify-center mb-6'>
 							<Target className='w-9 h-9 text-[#800020]' />
 						</div>
@@ -22,7 +22,7 @@ export default function MissionVision() {
 						</p>
 					</Card>
 
-					<Card className='bg-white border-0 shadow-xl rounded-3xl p-10 hover:shadow-2xl transition-shadow'>
+					<Card className='bg-white border-0 shadow-xl rounded-3xl p-10 hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-1'>
 						<div className='bg-[#F9D0D9] w-16 h-16 rounded-2xl flex items-center justify-center mb-6'>
 							<Lightbulb className='w-9 h-9 text-[#800020]' />
 						</div>

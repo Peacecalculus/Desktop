@@ -14,13 +14,13 @@ export default function FinalCTA() {
 				<div className='flex flex-col sm:flex-row gap-6 justify-center'>
 					<Button
 						size='lg'
-						className='bg-white text-[#800020] hover:bg-gray-100 px-10 h-14 text-lg font-bold rounded-xl'>
+						className='bg-white text-[#800020] hover:bg-gray-100 px-10 h-14 text-lg font-bold rounded-xl transition-all duration-500 ease-in-out transform hover:scale-105'>
 						Start Free Trial
 					</Button>
 					<Button
 						size='lg'
 						variant='outline'
-						className='border-white text-white hover:bg-white/10 px-10 h-14 text-lg font-bold rounded-xl'>
+						className='border-white text-white hover:bg-white/10 px-10 h-14 text-lg font-bold rounded-xl transition-all duration-500 ease-in-out transform hover:scale-105'>
 						Get in Touch
 					</Button>
 				</div>
