@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
+  Package, 
   ClipboardCheck, 
   Camera, 
   TrendingUp, 
@@ -18,13 +19,38 @@ import {
   Building2,
   Wrench,
   BarChart3,
-  Bell,
-  Package
+  Bell
 } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 w-full border-b bg-white/95 dark:bg-slate-950/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Package className="h-8 w-8 text-primary" />
+              <span className="text-2xl font-bold text-slate-900 dark:text-white">StoreKeeper</span>
+            </div>
+            <div className="hidden md:flex items-center gap-6">
+              <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Features</Link>
+              <Link href="#benefits" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Benefits</Link>
+              <Link href="#use-cases" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Use Cases</Link>
+              <Link href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Pricing</Link>
+            </div>
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" asChild>
+                <Link href="/login">Sign In</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/signup">Get Started</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 sm:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -345,6 +371,52 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="py-12 border-t bg-slate-50 dark:bg-slate-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Package className="h-6 w-6 text-primary" />
+                <span className="text-xl font-bold">StoreKeeper</span>
+              </div>
+              <p className="text-muted-foreground text-sm">
+                Simple inventory tracking for teams that need to know what&apos;s in stock, who&apos;s using it, and when to restock.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Product</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="#features" className="hover:text-primary transition-colors">Features</Link></li>
+                <li><Link href="#pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Integrations</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">API</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Company</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="#" className="hover:text-primary transition-colors">About</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Blog</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Careers</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Legal</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="#" className="hover:text-primary transition-colors">Privacy</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Terms</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Security</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
+            <p>&copy; 2025 StoreKeeper. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
