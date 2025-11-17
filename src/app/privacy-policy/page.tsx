@@ -50,8 +50,7 @@ export default function PrivacyPolicyPage() {
         {/* Sidebar (flush to left) */}
         <aside
           aria-label="Table of contents"
-          className="hidden lg:block w-56 bg-gray-50 border-r border-gray-200 sticky top-0 h-screen"
-          style={{ paddingTop: "88px" }} // push content down to align with page header if any
+          className="hidden lg:block w-56 bg-gray-50 border-r border-gray-200 pt-22 sticky top-0 h-screen"
         >
           <div className="px-4">
             <h4 className="text-sm font-semibold text-gray-700 mb-4">Table of Contents</h4>
