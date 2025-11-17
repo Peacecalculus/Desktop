@@ -70,8 +70,7 @@ export default function Home() {
                 <Button size="lg" className="text-lg" asChild>
                   <Link href="/signup">Start Free Trial</Link>
                 </Button>
-                <Button size="lg" variant="outline" className="text-lg" asChild>
-                  <Link href="#features">Explore Features</Link>
+                <Button size="lg" variant="outline" className="text-lg" as
                 </Button>
               </div>
               <div className="flex items-center gap-8 pt-4">
@@ -134,7 +133,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature Cards */}
-            <Card className="border-l-4 border-l-primary bg-gradient-to-br from-primary/5 to-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-primary/10">
+
               <CardHeader>
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <Package className="h-6 w-6 text-primary" />
@@ -145,8 +144,6 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
             </Card>
-
-            <Card className="border-l-4 border-l-green-500 bg-gradient-to-br from-green-50 dark:from-green-950/20 to-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-green-100 dark:hover:from-green-950/40">
               <CardHeader>
                 <div className="w-12 h-12 bg-green-50 dark:bg-green-950 rounded-lg flex items-center justify-center mb-4">
                   <ClipboardCheck className="h-6 w-6 text-green-600 dark:text-green-400" />
@@ -157,8 +154,6 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
             </Card>
-
-            <Card className="border-l-4 border-l-purple-500 bg-gradient-to-br from-purple-50 dark:from-purple-950/20 to-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-purple-100 dark:hover:from-purple-950/40">
               <CardHeader>
                 <div className="w-12 h-12 bg-purple-50 dark:bg-purple-950 rounded-lg flex items-center justify-center mb-4">
                   <Camera className="h-6 w-6 text-purple-600 dark:text-purple-400" />
@@ -169,8 +164,6 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
             </Card>
-
-            <Card className="border-l-4 border-l-orange-500 bg-gradient-to-br from-orange-50 dark:from-orange-950/20 to-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-orange-100 dark:hover:from-orange-950/40">
               <CardHeader>
                 <div className="w-12 h-12 bg-orange-50 dark:bg-orange-950 rounded-lg flex items-center justify-center mb-4">
                   <TrendingUp className="h-6 w-6 text-orange-600 dark:text-orange-400" />
@@ -181,8 +174,6 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
             </Card>
-
-            <Card className="border-l-4 border-l-red-500 bg-gradient-to-br from-red-50 dark:from-red-950/20 to-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-red-100 dark:hover:from-red-950/40">
               <CardHeader>
                 <div className="w-12 h-12 bg-red-50 dark:bg-red-950 rounded-lg flex items-center justify-center mb-4">
                   <FileText className="h-6 w-6 text-red-600 dark:text-red-400" />
@@ -193,8 +184,6 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
             </Card>
-
-            <Card className="border-l-4 border-l-yellow-500 bg-gradient-to-br from-yellow-50 dark:from-yellow-950/20 to-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-yellow-100 dark:hover:from-yellow-950/40">
               <CardHeader>
                 <div className="w-12 h-12 bg-yellow-50 dark:bg-yellow-950 rounded-lg flex items-center justify-center mb-4">
                   <Bell className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
@@ -223,7 +212,6 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="border-t-4 border-t-primary bg-gradient-to-b from-primary/5 to-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-primary/10">
               <CardHeader className="text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Warehouse className="h-8 w-8 text-primary" />
@@ -234,8 +222,6 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
             </Card>
-
-            <Card className="border-t-4 border-t-orange-500 bg-gradient-to-b from-orange-50 dark:from-orange-950/20 to-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-orange-100 dark:hover:from-orange-950/40">
               <CardHeader className="text-center">
                 <div className="w-16 h-16 bg-orange-50 dark:bg-orange-950 rounded-full flex items-center justify-center mx-auto mb-4">
                   <HardHat className="h-8 w-8 text-orange-600 dark:text-orange-400" />
@@ -246,8 +232,6 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
             </Card>
-
-            <Card className="border-t-4 border-t-green-500 bg-gradient-to-b from-green-50 dark:from-green-950/20 to-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-green-100 dark:hover:from-green-950/40">
               <CardHeader className="text-center">
                 <div className="w-16 h-16 bg-green-50 dark:bg-green-950 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Building2 className="h-8 w-8 text-green-600 dark:text-green-400" />
@@ -258,8 +242,6 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
             </Card>
-
-            <Card className="border-t-4 border-t-purple-500 bg-gradient-to-b from-purple-50 dark:from-purple-950/20 to-transparent transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-purple-100 dark:hover:from-purple-950/40">
               <CardHeader className="text-center">
                 <div className="w-16 h-16 bg-purple-50 dark:bg-purple-950 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Wrench className="h-8 w-8 text-purple-600 dark:text-purple-400" />
@@ -353,7 +335,6 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section id="pricing" className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Ready to Take Control of Your Inventory?
