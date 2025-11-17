@@ -45,7 +45,7 @@ export default function Home() {
                   <Link href="/signup">Start Free Trial</Link>
                 </Button>
                 <Button size="lg" variant="outline" className="text-lg" asChild>
-                  <Link href="#demo">Watch Demo</Link>
+                  <Link href="#features">Explore Features</Link>
                 </Button>
               </div>
               <div className="flex items-center gap-8 pt-4">
@@ -327,7 +327,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section id="pricing" className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Ready to Take Control of Your Inventory?
