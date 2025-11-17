@@ -1,9 +1,10 @@
 // import Image from "next/image";
+import WaitList from "@/pages/external/waitlistPage";
 
 export default function Home() {
   return (
     <>
-    <div className="text-red-500">Stock</div>
+      <WaitList/>
     </>
   );
 }
