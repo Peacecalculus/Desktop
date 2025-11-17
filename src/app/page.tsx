@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
   Package, 
@@ -30,14 +30,14 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-2">
-              <Package className="h-8 w-8" style={{color: '#800020'}} />
+              <Package className="h-8 w-8 text-primary" />
               <span className="text-2xl font-bold text-slate-900 dark:text-white">StoreKeeper</span>
             </div>
             <div className="hidden md:flex items-center gap-6">
-              <Link href="#features" className="text-sm font-medium transition-colors" style={{"--hover-color": "#800020"} as React.CSSProperties} onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Features</Link>
-              <Link href="#benefits" className="text-sm font-medium transition-colors" style={{"--hover-color": "#800020"} as React.CSSProperties} onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Benefits</Link>
-              <Link href="#use-cases" className="text-sm font-medium transition-colors" style={{"--hover-color": "#800020"} as React.CSSProperties} onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Use Cases</Link>
-              <Link href="#pricing" className="text-sm font-medium transition-colors" style={{"--hover-color": "#800020"} as React.CSSProperties} onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Pricing</Link>
+              <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Features</Link>
+              <Link href="#benefits" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Benefits</Link>
+              <Link href="#use-cases" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Use Cases</Link>
+              <Link href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Pricing</Link>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="ghost" asChild>
@@ -56,15 +56,15 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <Badge className="hover:opacity-90" style={{backgroundColor: '#f5e6e8', color: '#800020'}}>
+              <Badge variant="secondary" className="hover:opacity-90">
                 Simple Inventory Management
               </Badge>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white">
-                Track Your Inventory in <span style={{color: '#800020'}}>Real Time</span>
+                Track Your Inventory in <span className="text-primary">Real Time</span>
               </h1>
               <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
                 StoreKeeper is a lightweight inventory tracking system designed for warehouses, construction sites, 
-                and maintenance departments. Keep tabs on what's in stock, who's using it, and when it's time to restock.
+                and maintenance departments. Keep tabs on what&apos;s in stock, who&apos;s using it, and when it&apos;s time to restock.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="text-lg" asChild>
@@ -85,7 +85,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="relative lg:h-[600px] rounded-2xl p-8 shadow-2xl" style={{background: 'linear-gradient(to bottom right, #800020, #4d0013)'}}>
+            <div className="relative lg:h-[600px] rounded-2xl p-8 shadow-2xl bg-gradient-to-br from-primary to-primary/80">
               <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,transparent,black)]" />
               <div className="relative h-full flex items-center justify-center">
                 <Package className="h-48 w-48 text-white/20" />
@@ -96,24 +96,24 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 text-white" style={{backgroundColor: '#800020'}}>
+      <section className="py-12 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="text-4xl font-bold mb-2">10k+</div>
-              <div style={{color: '#f5e6e8'}}>Items Tracked</div>
+              <div className="text-primary-foreground/80">Items Tracked</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold mb-2">500+</div>
-              <div style={{color: '#f5e6e8'}}>Active Users</div>
+              <div className="text-primary-foreground/80">Active Users</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold mb-2">99.9%</div>
-              <div style={{color: '#f5e6e8'}}>Uptime</div>
+              <div className="text-primary-foreground/80">Uptime</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold mb-2">24/7</div>
-              <div style={{color: '#f5e6e8'}}>Support</div>
+              <div className="text-primary-foreground/80">Support</div>
             </div>
           </div>
         </div>
@@ -134,10 +134,10 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature Cards */}
-            <Card className="border-2 transition-colors hover:border-[#800020]">
+            <Card className="border-2 transition-colors hover:border-primary">
               <CardHeader>
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style={{backgroundColor: '#f5e6e8'}}>
-                  <Package className="h-6 w-6" style={{color: '#800020'}} />
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                  <Package className="h-6 w-6 text-primary" />
                 </div>
                 <CardTitle>Item Management</CardTitle>
                 <CardDescription>
@@ -146,22 +146,22 @@ export default function Home() {
               </CardHeader>
             </Card>
 
-            <Card className="border-2 hover:border-blue-500 transition-colors">
+            <Card className="border-2 hover:border-primary transition-colors">
               <CardHeader>
-                <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
-                  <ClipboardCheck className="h-6 w-6 text-green-600 dark:text-green-300" />
+                <div className="w-12 h-12 bg-green-50 dark:bg-green-950 rounded-lg flex items-center justify-center mb-4">
+                  <ClipboardCheck className="h-6 w-6 text-green-600 dark:text-green-400" />
                 </div>
                 <CardTitle>Check-In/Check-Out</CardTitle>
                 <CardDescription>
-                  Track who's using what, when they took it, and when they returned it with full accountability
+                  Track who&apos;s using what, when they took it, and when they returned it with full accountability
                 </CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="border-2 transition-colors hover:border-[#800020]">
+            <Card className="border-2 transition-colors hover:border-primary">
               <CardHeader>
-                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
-                  <Camera className="h-6 w-6 text-purple-600 dark:text-purple-300" />
+                <div className="w-12 h-12 bg-purple-50 dark:bg-purple-950 rounded-lg flex items-center justify-center mb-4">
+                  <Camera className="h-6 w-6 text-purple-600 dark:text-purple-400" />
                 </div>
                 <CardTitle>Item Snapshots</CardTitle>
                 <CardDescription>
@@ -170,10 +170,10 @@ export default function Home() {
               </CardHeader>
             </Card>
 
-            <Card className="border-2 transition-colors hover:border-[#800020]">
+            <Card className="border-2 transition-colors hover:border-primary">
               <CardHeader>
-                <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mb-4">
-                  <TrendingUp className="h-6 w-6 text-orange-600 dark:text-orange-300" />
+                <div className="w-12 h-12 bg-orange-50 dark:bg-orange-950 rounded-lg flex items-center justify-center mb-4">
+                  <TrendingUp className="h-6 w-6 text-orange-600 dark:text-orange-400" />
                 </div>
                 <CardTitle>Quantity Adjustments</CardTitle>
                 <CardDescription>
@@ -182,10 +182,10 @@ export default function Home() {
               </CardHeader>
             </Card>
 
-            <Card className="border-2 transition-colors hover:border-[#800020]">
+            <Card className="border-2 transition-colors hover:border-primary">
               <CardHeader>
-                <div className="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mb-4">
-                  <FileText className="h-6 w-6 text-red-600 dark:text-red-300" />
+                <div className="w-12 h-12 bg-red-50 dark:bg-red-950 rounded-lg flex items-center justify-center mb-4">
+                  <FileText className="h-6 w-6 text-red-600 dark:text-red-400" />
                 </div>
                 <CardTitle>Activity Logs</CardTitle>
                 <CardDescription>
@@ -194,10 +194,10 @@ export default function Home() {
               </CardHeader>
             </Card>
 
-            <Card className="border-2 transition-colors hover:border-[#800020]">
+            <Card className="border-2 transition-colors hover:border-primary">
               <CardHeader>
-                <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center mb-4">
-                  <Bell className="h-6 w-6 text-yellow-600 dark:text-yellow-300" />
+                <div className="w-12 h-12 bg-yellow-50 dark:bg-yellow-950 rounded-lg flex items-center justify-center mb-4">
+                  <Bell className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
                 </div>
                 <CardTitle>Low Stock Alerts</CardTitle>
                 <CardDescription>
@@ -225,8 +225,8 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card>
               <CardHeader className="text-center">
-                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{backgroundColor: '#f5e6e8'}}>
-                  <Warehouse className="h-8 w-8" style={{color: '#800020'}} />
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Warehouse className="h-8 w-8 text-primary" />
                 </div>
                 <CardTitle>Warehouses</CardTitle>
                 <CardDescription>
@@ -237,8 +237,8 @@ export default function Home() {
 
             <Card>
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <HardHat className="h-8 w-8 text-orange-600 dark:text-orange-300" />
+                <div className="w-16 h-16 bg-orange-50 dark:bg-orange-950 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <HardHat className="h-8 w-8 text-orange-600 dark:text-orange-400" />
                 </div>
                 <CardTitle>Construction Sites</CardTitle>
                 <CardDescription>
@@ -249,8 +249,8 @@ export default function Home() {
 
             <Card>
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Building2 className="h-8 w-8 text-green-600 dark:text-green-300" />
+                <div className="w-16 h-16 bg-green-50 dark:bg-green-950 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Building2 className="h-8 w-8 text-green-600 dark:text-green-400" />
                 </div>
                 <CardTitle>Office Supply Rooms</CardTitle>
                 <CardDescription>
@@ -261,8 +261,8 @@ export default function Home() {
 
             <Card>
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Wrench className="h-8 w-8 text-purple-600 dark:text-purple-300" />
+                <div className="w-16 h-16 bg-purple-50 dark:bg-purple-950 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Wrench className="h-8 w-8 text-purple-600 dark:text-purple-400" />
                 </div>
                 <CardTitle>Maintenance Departments</CardTitle>
                 <CardDescription>
@@ -285,8 +285,8 @@ export default function Home() {
               </h2>
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{backgroundColor: '#f5e6e8'}}>
-                    <Clock className="h-6 w-6" style={{color: '#800020'}} />
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Clock className="h-6 w-6 text-primary" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Real-Time Updates</h3>
@@ -297,8 +297,8 @@ export default function Home() {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Users className="h-6 w-6 text-green-600 dark:text-green-300" />
+                  <div className="w-12 h-12 bg-green-50 dark:bg-green-950 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Users className="h-6 w-6 text-green-600 dark:text-green-400" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">User-Friendly Interface</h3>
@@ -309,8 +309,8 @@ export default function Home() {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Shield className="h-6 w-6 text-purple-600 dark:text-purple-300" />
+                  <div className="w-12 h-12 bg-purple-50 dark:bg-purple-950 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Shield className="h-6 w-6 text-purple-600 dark:text-purple-400" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Full Accountability</h3>
@@ -321,8 +321,8 @@ export default function Home() {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <BarChart3 className="h-6 w-6 text-orange-600 dark:text-orange-300" />
+                  <div className="w-12 h-12 bg-orange-50 dark:bg-orange-950 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <BarChart3 className="h-6 w-6 text-orange-600 dark:text-orange-400" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Actionable Insights</h3>
@@ -334,10 +334,10 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative h-[600px] rounded-2xl p-8 shadow-xl" style={{background: 'linear-gradient(to bottom right, #800020, #4d0013)'}}>
+            <div className="relative h-[600px] rounded-2xl p-8 shadow-xl bg-gradient-to-br from-primary to-primary/80">
               <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,transparent,black)]" />
               <div className="relative h-full flex items-center justify-center">
-                <div className="text-center text-white space-y-8">
+                <div className="text-center text-primary-foreground space-y-8">
                   <Package className="h-32 w-32 mx-auto opacity-90" />
                   <div className="space-y-4">
                     <h3 className="text-3xl font-bold">StoreKeeper</h3>
@@ -353,19 +353,19 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 text-white" style={{backgroundColor: '#800020'}}>
+      <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Ready to Take Control of Your Inventory?
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto" style={{color: '#f5e6e8'}}>
+          <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
             Join hundreds of businesses that trust StoreKeeper for their inventory management needs
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" className="text-lg" asChild>
               <Link href="/signup">Start Free Trial</Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg bg-transparent border-white text-white hover:bg-white/10" asChild>
+            <Button size="lg" variant="outline" className="text-lg bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10" asChild>
               <Link href="/contact">Contact Sales</Link>
             </Button>
           </div>
@@ -378,41 +378,41 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Package className="h-6 w-6" style={{color: '#800020'}} />
+                <Package className="h-6 w-6 text-primary" />
                 <span className="text-xl font-bold">StoreKeeper</span>
               </div>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">
-                Simple inventory tracking for teams that need to know what's in stock, who's using it, and when to restock.
+              <p className="text-muted-foreground text-sm">
+                Simple inventory tracking for teams that need to know what&apos;s in stock, who&apos;s using it, and when to restock.
               </p>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Product</h3>
-              <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
-                <li><Link href="#features" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Features</Link></li>
-                <li><Link href="#pricing" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Pricing</Link></li>
-                <li><Link href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Integrations</Link></li>
-                <li><Link href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>API</Link></li>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="#features" className="hover:text-primary transition-colors">Features</Link></li>
+                <li><Link href="#pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Integrations</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">API</Link></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
-                <li><Link href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>About</Link></li>
-                <li><Link href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Blog</Link></li>
-                <li><Link href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Careers</Link></li>
-                <li><Link href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Contact</Link></li>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="#" className="hover:text-primary transition-colors">About</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Blog</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Careers</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Contact</Link></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
-                <li><Link href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Privacy</Link></li>
-                <li><Link href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Terms</Link></li>
-                <li><Link href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#800020'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Security</Link></li>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="#" className="hover:text-primary transition-colors">Privacy</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Terms</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Security</Link></li>
               </ul>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t text-center text-sm text-slate-600 dark:text-slate-400">
+          <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
             <p>&copy; 2025 StoreKeeper. All rights reserved.</p>
           </div>
         </div>
