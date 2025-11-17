@@ -63,6 +63,7 @@ interface CountdownState {
 interface NavItemProps {
   children: React.ReactNode;
   href: string;
+  className?: string;
   onClick?: () => void;
 }
 
@@ -253,6 +254,8 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   );
 };
 
+const currentYear = new Date().getFullYear();
+
 const Waitlist: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleNavItemClick = () => {
@@ -293,7 +296,11 @@ const Waitlist: React.FC = () => {
       <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex justify-between items-center h-16">
-            <a href="#" className="flex items-center space-x-2 cursor-pointer">
+            {/* LEFT: Logo */}
+            <a
+              href="#"
+              className="flex items-center space-x-2 cursor-pointer shrink-0"
+            >
               <Image
                 src="/logo.png"
                 alt="StockKeeper Logo"
@@ -306,16 +313,20 @@ const Waitlist: React.FC = () => {
               </span>
             </a>
 
-            {/* 1. WRAP nav and button in a single container and hide on mobile */}
-            <div className="hidden md:flex items-center">
-              <nav className="flex space-x-3 items-center">
+            {/* CENTER: Navigation Links (Hidden on mobile) */}
+            <nav className="hidden md:flex absolute inset-x-0 justify-center pointer-events-none">
+              <div className="flex space-x-3 items-center pointer-events-auto">
                 <NavItem href="#features">Features</NavItem>
                 <NavItem href="#benefits">Benefits</NavItem>
                 <NavItem href="#faq">FAQ</NavItem>
-              </nav>
+              </div>
+            </nav>
 
+            {/* RIGHT: Button and Mobile Menu Toggle */}
+            <div className="flex items-center space-x-4">
               <Button
                 className={`
+            hidden md:flex 
             text-sm ml-6
             px-5 py-2.5 sm:px-6 sm:py-3 font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2
             
@@ -330,27 +341,24 @@ const Waitlist: React.FC = () => {
               >
                 Join Waitlist
               </Button>
-            </div>
 
-            {/* 2. Mobile Menu Toggle Button */}
-            <button
-              className="md:hidden p-2 cursor-pointer" // No need for hover:cursor-pointer here
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle Menu"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+              {/* Mobile Menu Toggle Button */}
+              <button
+                className="md:hidden p-2 cursor-pointer"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle Menu"
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
-
         {isMenuOpen && (
           <div
             className="md:hidden fixed inset-0 bg-black/30 z-40 cursor-pointer"
             onClick={() => setIsMenuOpen(false)}
           ></div>
         )}
-
-        {/* Sidebar Panel (Unchanged) */}
         <div
           className={`md:hidden fixed top-0 right-0 h-full w-64 max-w-full shadow-2xl z-50 transform transition-transform duration-300 ease-in-out`}
           style={{
@@ -358,7 +366,7 @@ const Waitlist: React.FC = () => {
             transform: isMenuOpen ? "translateX(0%)" : "translateX(100%)",
           }}
         >
-          {/* Close Button */}
+          {/* Close Button (Unchanged) */}
           <div className="flex justify-between items-center h-16 px-4 border-b border-gray-200 cursor-pointer">
             <span className="text-lg font-bold text-[#111827]">Menu</span>
             <button
@@ -370,18 +378,29 @@ const Waitlist: React.FC = () => {
             </button>
           </div>
 
-          {/* Navigation Items */}
+          {/* Navigation Items - FIX APPLIED HERE */}
           <div className="flex flex-col space-y-2 py-4">
-            <NavItem href="#features" onClick={handleNavItemClick}>
+            <NavItem
+              href="#features"
+              onClick={handleNavItemClick}
+              className="hover:text-[#800020]" 
+            >
               Features
             </NavItem>
-            <NavItem href="#benefits" onClick={handleNavItemClick}>
+            <NavItem
+              href="#benefits"
+              onClick={handleNavItemClick}
+              className="hover:text-[#800020]" 
+            >
               Benefits
             </NavItem>
-            <NavItem href="#faq" onClick={handleNavItemClick}>
+            <NavItem
+              href="#faq"
+              onClick={handleNavItemClick}
+              className="hover:text-[#800020]"
+            >
               FAQ
             </NavItem>
-            {/* Join Waitlist Button (Mobile) */}
             <div className="pt-4 mt-2 border-t border-gray-200 px-4">
               <Button
                 variant="primary"
@@ -743,23 +762,30 @@ const Waitlist: React.FC = () => {
       <footer className="bg-[#111827] text-white mt-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-6 sm:py-8 text-sm">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-            <div className="flex items-center space-x-2 mb-4 sm:mb-0">
-              <Image
-                src="/logo.png"
-                alt="StockKeeper Logo"
-                width={30}
-                height={30}
-                className="h-7 w-auto"
-              />
-              <span className="text-lg font-bold">StockKeeper</span>
-              {/* <div>
+            <div className="mb-4 sm:mb-0">
+              <a
+                href="#"
+                className="flex items-center space-x-2 cursor-pointer"
+              >
+                <Image
+                  src="/logo.png"
+                  alt="StockKeeper Logo"
+                  width={30}
+                  height={30}
+                  className="h-7 w-auto"
+                />
+                <span className="text-lg font-bold">StockKeeper</span>
+              </a>
+              {/* Motto added below the logo/title */}
+              <p className="text-gray-400 text-xs mt-1 sm:ml-9">
                 Smart inventory management made simple for modern businesses.
-              </div> */}
+              </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-left space-y-2 sm:space-y-0 sm:space-x-6 text-gray-400 text-xs sm:text-sm">
+            {/* RIGHT: Copyright and Links */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-6 text-gray-400 text-xs sm:text-sm gap-4">
               <span className="order-2 sm:order-1">
-                &copy; 2024 StockKeeper. All rights reserved.
+                &copy; {currentYear} StockKeeper. All rights reserved.
               </span>
               <div className="flex space-x-4 order-1 sm:order-2">
                 <a href="#" className="hover:text-white">
