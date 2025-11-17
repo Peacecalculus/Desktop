@@ -74,13 +74,14 @@ jobs:
           # Create deployment directory if it doesn't exist
           ssh -i ~/.ssh/deploy_key $SSH_USER@$SSH_HOST "mkdir -p /var/www/stock-keeping"
 
-          # Sync files to server
+          # Sync files to server (including .next directory)
           rsync -avz --delete \
             -e "ssh -i ~/.ssh/deploy_key" \
             --exclude 'node_modules' \
             --exclude '.git' \
             --exclude '.env.local' \
             --exclude '.github' \
+            --exclude '.gitignore' \
             ./ \
             $SSH_USER@$SSH_HOST:/var/www/stock-keeping/
 
@@ -91,10 +92,17 @@ jobs:
         run: |
           ssh -i ~/.ssh/deploy_key $SSH_USER@$SSH_HOST << 'EOF'
             cd /var/www/stock-keeping
-            
+
+            # Verify .next directory exists
+            if [ ! -d ".next" ]; then
+              echo "Error: .next directory not found. Building locally..."
+              npm ci
+              npm run build
+            fi
+
             # Install production dependencies
             npm ci --production
-            
+
             # Restart or start PM2 process
             if pm2 describe stock-keeping-fe > /dev/null 2>&1; then
               echo "Restarting existing PM2 process..."
@@ -104,7 +112,7 @@ jobs:
               pm2 start npm --name "stock-keeping-fe" -- start
               pm2 save
             fi
-            
+
             # Show PM2 status
             pm2 list
           EOF
