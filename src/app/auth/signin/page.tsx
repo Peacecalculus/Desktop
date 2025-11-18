@@ -162,7 +162,7 @@ export default function LoginPage() {
                   <div className="flex items-center justify-between leading-relaxed text-[14px]  text-[#374151] font-weight[500]">
                     <Label htmlFor="password">Password</Label>
                     <Link
-                      href="/forgot-password"
+                      href="/auth/reset-password"
                       className="  text-[14px] font-weight[500]   text-[#800020] leading-relaxed font-normal hover:underline"
                     >
                       Forgot password?
@@ -221,7 +221,7 @@ export default function LoginPage() {
               <div>
                 Don&apos;t have an account?{" "}
                 <Link
-                  href="/signup"
+                  href="/auth/signup"
                   className="text-[#4B5563] font-medium hover:underline font-weight[400] text-[14px] leading-relaxed "
                 >
                 <span className="text-[#800020] font-weight[600] texx-bold leading-relaxed text-[14px]"> Sign up for free</span>

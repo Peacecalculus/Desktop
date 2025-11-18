@@ -1,32 +1,30 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+"use client"
+
 import "./globals.css";
-
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-	title: "Stock-keeping-app",
-	description: "A stock keeping app",
-};
+import LayoutWrapper from './layout/LayoutWrapper'
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
+
+	const path = usePathname();
+	const isWaitlistPage = path === "/";
+
+
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`antialiased`}
 			>
+				{
+					isWaitlistPage
+						? children
+						: <LayoutWrapper>
+							{children}
+						</LayoutWrapper>
 
-				{children}
+				}
 
 			</body>
 		</html>
