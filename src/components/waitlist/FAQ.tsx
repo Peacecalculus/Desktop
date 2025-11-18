@@ -10,7 +10,7 @@ export type { FAQItemProps };
 const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="rounded-xl bg-white shadow-sm transition-all duration-300 hover:shadow-md p-4 sm:p-5 border border-gray-100">
+    <div className="rounded-xl bg-white shadow-sm transition-all duration-300 hover:shadow-md p-4 sm:p-5 border border-gray-100 mb-8">
       <button
         className="flex justify-between items-center w-full text-left font-semibold text-gray-800 hover:text-gray-900"
         onClick={() => setIsOpen(!isOpen)}

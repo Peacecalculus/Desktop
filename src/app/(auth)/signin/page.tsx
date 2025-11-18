@@ -1,8 +1,24 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
+// React Icons
+import {
+  FiMail,
+  FiLock,
+  FiCheckSquare,
+  // FiSquare,
+  FiUsers,
+} from "react-icons/fi";
+import { FaClipboardCheck } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
+import { FaCamera } from "react-icons/fa6";
+import { GoHistory } from "react-icons/go"; 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Card,
   CardHeader,
@@ -10,221 +26,300 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
 
-export default function LoginPage() {
+function clsx(...args: unknown[]) {
+  return args.filter(Boolean).join(" ");
+}
+
+export default function SignInPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const PRIMARY_RED = "#800020";
+  const TEXT_GRAY_MEDIUM = "#6B7280";
+  const TEXT_GRAY_DARK = "#1F2937";
+  const INPUT_BORDER_COLOR = "#D1D5DB";
+  const BORDER_DIVIDER = "#E5E7EB";
+
+  const isFormValid = email.trim() !== "" && password.trim() !== "";
+
+  const features = [
+    {
+      icon: FaClipboardCheck,
+      title: "Check In/Out",
+      description: "Track who takes what and when",
+    },
+    {
+      icon: FaCamera,
+      title: "Item Snapshots",
+      description: "Document item conditions quickly",
+    },
+    {
+      icon: GoHistory,
+      title: "Activity Logs",
+      description: "Complete movement history",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-card rounded-3xl border shadow-sm overflow-hidden">
-        {/* LEFT SIDE – warehouse image + StoreKeeper info */}
-        <div className="px-10 py-12 flex items-center">
-          <div className="space-y-8 max-w-md">
-            {/* Warehouse image */}
-            <div className="relative w-full aspect-[4/3] overflow-hidden  ">
-              {/* change src to the real image later (warehouse photo) */}
-              <Image
-                src="/Inventory management.png"
-                alt="Warehouse shelves"
-                fill
-                className="object-cover rounded-xl"
-              />
+    <div className="min-h-screen  flex items-center justify-center p-4">
+      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+        {/* LEFT SIDE */}
+        <div className={clsx("hidden lg:flex flex-col gap-8 p-10")}>
+          <div className="relative w-full aspect-4/3 rounded-lg overflow-hidden">
+            <Image
+              src="/inventory-management.png"
+              alt="Warehouse shelves with stock inventory"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="space-y-6">
+            <div className="flex items-center gap-3">
+              <div
+                className={clsx(
+                  "inline-flex h-10 w-10 items-center justify-center rounded-lg text-white",
+                  `bg-[${PRIMARY_RED}]`
+                )}
+              >
+                <Image
+                  src="/logo.png"
+                  alt="StockKeeper Logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 object-cover"
+                />
+              </div>
+              <div>
+                <p
+                  className={clsx(
+                    "font-semibold text-lg",
+                    `text-[${TEXT_GRAY_DARK}]`
+                  )}
+                >
+                  StoreKeeper
+                </p>
+                <p className={clsx("text-xs", `text-[${TEXT_GRAY_MEDIUM}]`)}>
+                  Simple store management system for tracking items in and out
+                  of your facility.
+                </p>
+              </div>
             </div>
 
-            {/* StoreKeeper title + description */}
-            <div className="space-y-3">
-  <div className="inline-flex items-center gap-3">
-    <div className="relative h-10 w-10">
-      <Image
-        src="/logo.png"
-        alt="logo"
-        fill
-        className="object-contain"
-      />
-    </div>
-
-    <p className="text-lg text-[30px] font-bold leading-relaxed text-[#111827]">StoreKeeper</p>
-  </div>
-
-  <p className="text-[18px] font-weight[400] leading-relaxed max-w-sm text-[#4B5563]">
-    Simple store management system for tracking items in and out of
-    your facility.
-  </p>
-</div>
-
-            {/* Feature bullets: Check in/out, Item snapshots, Activity logs */}
-            {/* Feature bullets: Check in/out, Item snapshots, Activity logs */}
-<div className="space-y-4 text-sm">
-
-  {/* 1 — Check In/Out */}
-  <div className="flex items-start gap-3">
-    <div className="relative h-8 w-8 rounded-full bg-[#FCE7EB] flex items-center justify-center">
-      <Image
-        src="/bgget.png"
-        alt="check in/out"
-        fill
-        className="object-contain p-1"
-      />
-    </div>
-
-    <div>
-      <p className="font-bold text-[16px] leading-relaxed font-weight[600]">Check In/Out</p>
-      <p className="text-[14px] font-weight[400] text-[#4B5563] leading-relaxed">
-        Track who takes what and when.
-      </p>
-    </div>
-  </div>
-
-  {/* 2 — Item Snapshots */}
-  <div className="flex items-start gap-3">
-    <div className="relative h-8 w-8 rounded-full bg-[#FCE7EB] flex items-center justify-center">
-      <Image
-        src="/camera.png"
-        alt="camera"
-        fill
-        className="object-contain p-1"
-      />
-    </div>
-
-    <div>
-      <p className="font-bold text-[16px] leading-relaxed font-weight[600]">Item Snapshots</p>
-      <p className="text-[14px] font-weight[400] text-[#4B5563] leading-relaxed">
-        Document item conditions quickly.
-      </p>
-    </div>
-  </div>
-
-  {/* 3 — Activity Logs */}
-  <div className="flex text-[16px] leading-relaxed font-weight[600] items-start gap-3">
-    <div className="relative h-8 w-8 rounded-full bg-[#FCE7EB] text-[14px] font-weight[400] flex items-center justify-center">
-      <Image
-        src="/round.png"
-        alt="activity log"
-        fill
-        className="object-contain p-1"
-      />
-    </div>
-
-    <div>
-      <p className="font-medium">Activity Logs</p>
-      <p className="text-xs text-muted-foreground">
-        Complete movement history.
-      </p>
-    </div>
-  </div>
-
-</div>
-
+            {/* Feature List */}
+            <div className="space-y-4">
+              {features.map((feature, index) => (
+                <div key={index} className="flex items-center gap-4">
+                  <feature.icon
+                    className={clsx(
+                      "mt-1 h-10 w-10 bg-[#FCE7EB] p-3 rounded-full",
+                      `text-[${PRIMARY_RED}]`
+                    )}
+                  />
+                  <div>
+                    <h3
+                      className={clsx(
+                        "font-semibold text-sm",
+                        `text-[${TEXT_GRAY_DARK}]`
+                      )}
+                    >
+                      {feature.title}
+                    </h3>
+                    <p
+                      className={clsx("text-xs", `text-[${TEXT_GRAY_MEDIUM}]`)}
+                    >
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* RIGHT SIDE – form */}
-        <div className="px-10 py-12 flex items-center bg-[#F9FAFB]">
-          <Card className="w-full max-w-md mx-auto border-none shadow-none bg-transparent p-0">
-            <CardHeader className="px-0">
+        {/* RIGHT SIDE */}
+        <div className="px-6 py-10 sm:px-8 flex items-center justify-center bg-[#F9FAFB]">
+          <Card className="w-full border-none shadow-none p-0 max-w-sm mx-auto bg-[#F9FAFB]">
+            <CardHeader className="px-0 bg-[#F9FAFB]">
               <div className="flex flex-col items-center gap-4">
-                {/* top circle icon */}
-           <div className="relative h-17 w-17 inline-flex items-center justify-center rounded-full ">
-  <Image
-    src="/gift.png"
-    alt="logo log"
-    fill
-    className="object-contain p-2"
-  />
-</div>
-
+                <div
+                  className={clsx(
+                    "inline-flex h-12 w-12 items-center justify-center rounded-full text-white",
+                    `bg-[${PRIMARY_RED}]`
+                  )}
+                >
+                  <FiUsers className="text-xl" />
+                </div>
                 <div className="space-y-1 text-center">
-                  <CardTitle className="text-[30px] font-weight[700] font-bold leading-relaxed text-[#111827]">Welcome Back</CardTitle>
-                  <CardDescription className="text-[#4B5563] font-weight[400] text-[16px] leading-relaxed">
+                  <CardTitle
+                    className={clsx(
+                      "text-2xl font-bold",
+                      `text-[${TEXT_GRAY_DARK}]`
+                    )}
+                  >
+                    Welcome Back
+                  </CardTitle>
+                  <CardDescription className={`text-[${TEXT_GRAY_MEDIUM}]`}>
                     Sign in to manage your store inventory
                   </CardDescription>
                 </div>
               </div>
             </CardHeader>
 
-            <CardContent className="space-y-6 px-0">
+            <CardContent className="space-y-6 px-0 bg-[#F9FAFB]">
               <form className="space-y-4">
-                {/* Email */}
-                <div className="space-y-2 leading-relaxed text-[14px]  text-[#374151] font-weight[500]">
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="you@company.com"
-                    className=" bg-[#FFFFFF]"
-                  />
-                </div>
-
-                {/* Password + forgot */}
+                {/* Email Address */}
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between leading-relaxed text-[14px]  text-[#374151] font-weight[500]">
-                    <Label htmlFor="password">Password</Label>
-                    <Link
-                      href="/forgot-password"
-                      className="  text-[14px] font-weight[500]   text-[#800020] leading-relaxed font-normal hover:underline"
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="••••••••"
-                    className=" bg-[#FFFFFF]"
-                  />
-                </div>
-
-                {/* Remember me */}
-                <div className="flex items-center justify-between">
-                  <label className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <input
-                      type="checkbox"
-                      className="h-4 w-4 rounded border-input text-[14px] font-weight[400] leading-relaxed text-[#4B5563]"
+                  <Label htmlFor="email" className={`text-[${TEXT_GRAY_DARK}]`}>
+                    Email Address
+                  </Label>
+                  <div className="relative">
+                    <FiMail
+                      className={clsx(
+                        "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4",
+                        `text-[${TEXT_GRAY_MEDIUM}]`
+                      )}
                     />
-                    <span>Remember me</span>
-                  </label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="you@company.com" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className={clsx(
+                        "pl-10",
+                        `border-[${INPUT_BORDER_COLOR}]`,
+                        `focus-visible:ring-offset-0 focus-visible:ring-2 focus-visible:ring-[${PRIMARY_RED}]`
+                      )}
+                    />
+                  </div>
                 </div>
 
-                {/* Sign in button */}
-                <Button type="submit" size="lg" className="w-full bg-[#800020]">
+                {/* Password */}
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="password"
+                    className={`text-[${TEXT_GRAY_DARK}]`}
+                  >
+                    Password
+                  </Label>
+                  <div className="relative">
+                    <FiLock
+                      className={clsx(
+                        "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4",
+                        `text-[${TEXT_GRAY_MEDIUM}]`
+                      )}
+                    />
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className={clsx(
+                        "pl-10",
+                        `border-[${INPUT_BORDER_COLOR}]`,
+                        `focus-visible:ring-offset-0 focus-visible:ring-2 focus-visible:ring-[${PRIMARY_RED}]`
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-xs pt-1">
+                  <div className="flex items-center space-x-2">
+                    <div
+                      onClick={() => setRememberMe(!rememberMe)}
+                      className={clsx(
+                        "cursor-pointer h-4 w-4 rounded border flex items-center justify-center",
+                        rememberMe
+                          ? `bg-[${PRIMARY_RED}] border-transparent`
+                          : `border-[${INPUT_BORDER_COLOR}]`
+                      )}
+                    >
+                      {rememberMe && (
+                        <FiCheckSquare className="text-white h-4 w-4" />
+                      )}
+                    </div>
+                    <Label
+                      htmlFor="remember-me"
+                      className={clsx(
+                        "text-sm font-normal leading-none",
+                        `text-[${TEXT_GRAY_MEDIUM}]`
+                      )}
+                    >
+                      Remember me
+                    </Label>
+                  </div>
+                  <Link
+                    href="/forgot-password"
+                    className={clsx(
+                      `text-xs font-medium hover:underline`,
+                      `text-[${PRIMARY_RED}]`
+                    )}
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className={clsx(
+                    "w-full text-white",
+                    `bg-[${PRIMARY_RED}]`,
+                    `hover:bg-[#6a001a]`
+                  )}
+                  disabled={!isFormValid}
+                >
                   Sign In
                 </Button>
               </form>
 
               {/* Divider */}
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                <div className="h-px flex-1 bg-border text-[14px] text-[#6B7280] font-weight-[400]" />
-                <span>Or continue with</span>
-                <div className="h-px flex-1 bg-border text-[14px] text-[#6B7280]" />
+                <div
+                  className={clsx("h-px flex-1", `bg-[${BORDER_DIVIDER}]`)}
+                />
+                <span className={`text-[${TEXT_GRAY_MEDIUM}]`}>
+                  Or continue with
+                </span>
+                <div
+                  className={clsx("h-px flex-1", `bg-[${BORDER_DIVIDER}]`)}
+                />
               </div>
 
-              {/* Google button */}
-<Button
-  variant="outline"
-  size="lg"
-  className="w-full flex items-center justify-center gap-2"
->
-  <Image
-    src="/google.png"
-    alt="Google"
-    width={18}
-    height={18}
-    className="object-contain"
-  />
-  Continue with Google
-</Button>
+              {/* Google */}
+              <Button
+                variant="outline"
+                size="lg"
+                className={clsx(
+                  "w-full text-sm",
+                  `border-[${INPUT_BORDER_COLOR}]`,
+                  `text-[${TEXT_GRAY_DARK}]`,
+                  `hover:bg-gray-50`
+                )}
+              >
+                <FaGoogle
+                  className={clsx("mr-2 h-4 w-4", `text-[${TEXT_GRAY_DARK}]`)}
+                />
+                Continue with Google
+              </Button>
             </CardContent>
 
-            <CardFooter className="px-0 pt-4 flex justify-center text-xs text-muted-foreground">
-              <div>
-                Don&apos;t have an account?{" "}
+            <CardFooter className="px-0 pt-4 flex flex-col items-center gap-4 text-xs text-muted-foreground bg-[#F9FAFB]">
+              <div className="flex items-center gap-1 text-sm">
+                <span className={`text-[${TEXT_GRAY_MEDIUM}]`}>
+                  Dont have an account?
+                </span>
                 <Link
                   href="/signup"
-                  className="text-[#4B5563] font-medium hover:underline font-weight[400] text-[14px] leading-relaxed "
+                  className={clsx(
+                    `text-[${PRIMARY_RED}]`,
+                    "font-medium hover:underline"
+                  )}
                 >
-                <span className="text-[#800020] font-weight[600] texx-bold leading-relaxed text-[14px]"> Sign up for free</span>
+                  Sign up for free
                 </Link>
               </div>
             </CardFooter>
@@ -232,5 +327,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
