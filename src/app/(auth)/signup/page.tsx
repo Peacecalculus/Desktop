@@ -14,10 +14,30 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useState } from "react"
+function clsx(...args: unknown[]) {
+  return args.filter(Boolean).join(' ');
+}
 
 export default function SignupPage() {
+  const [password, setPassword] = useState("");
+  // Password requirements
+  const hasLength = password.length >= 8;
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasLowercase = /[a-z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+  const hasSpecial = /[^A-Za-z0-9]/.test(password);
+  // Checklist
+  const checks = [hasLength, hasUppercase, hasLowercase, hasNumber || hasSpecial];
+  const passed = checks.filter(Boolean).length;
+  // Strength bar
+  let strengthLabel = "Weak";
+  let strengthColor = "bg-red-500";
+  if (passed === 2) { strengthLabel = "Medium"; strengthColor = "bg-yellow-400"; }
+  if (passed >= 3) { strengthLabel = "Strong"; strengthColor = "bg-green-500"; }
+
   return (
-    <div className="min-h-screen bg-[#ffffff] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#ffffff] flex items-center justify-center px-4 mb-8">
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-card rounded-xl border shadow-sm overflow-hidden">
         {/* LEFT SIDE */}
         <div className="bg-muted/40 px-8 py-10 flex flex-col gap-8">
@@ -129,7 +149,50 @@ export default function SignupPage() {
                 {/* Password */}
                 <div className="space-y-2">
                   <Label htmlFor="password">Password</Label>
-                  <Input id="password" type="password" placeholder="••••••••" />
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                  {/* Password strength bar */}
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="flex-1 h-2 rounded-full bg-gray-200 flex">
+                      <div className={clsx("h-2 rounded-full transition-all", strengthColor)} style={{ width: `${(passed/4)*100}%` }}></div>
+                    </div>
+                    <span className={clsx("ml-2 font-medium", strengthColor === "bg-green-500" ? "text-green-700" : strengthColor === "bg-yellow-400" ? "text-yellow-600" : "text-red-700")}>{strengthLabel}</span>
+                  </div>
+                  {/* Password requirements checklist */}
+                  <div className="mt-3 rounded-xl bg-gray-50 border border-gray-200 p-4">
+                    <p className="font-semibold mb-2">Password must contain:</p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2">
+                        <span className={`h-4 w-4 rounded-full flex items-center justify-center ${hasLength ? 'bg-green-100 border-green-500 border' : 'bg-gray-200 border-gray-400 border'}`}>
+                          {hasLength ? <span className="text-green-600 text-lg">●</span> : <span className="text-gray-400 text-lg">○</span>}
+                        </span>
+                        <span className={hasLength ? 'text-green-700' : 'text-gray-700'}>At least 8 characters</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className={`h-4 w-4 rounded-full flex items-center justify-center ${hasUppercase ? 'bg-green-100 border-green-500 border' : 'bg-gray-200 border-gray-400 border'}`}>
+                          {hasUppercase ? <span className="text-green-600 text-lg">●</span> : <span className="text-gray-400 text-lg">○</span>}
+                        </span>
+                        <span className={hasUppercase ? 'text-green-700' : 'text-gray-700'}>One uppercase letter</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className={`h-4 w-4 rounded-full flex items-center justify-center ${hasLowercase ? 'bg-green-100 border-green-500 border' : 'bg-gray-200 border-gray-400 border'}`}>
+                          {hasLowercase ? <span className="text-green-600 text-lg">●</span> : <span className="text-gray-400 text-lg">○</span>}
+                        </span>
+                        <span className={hasLowercase ? 'text-green-700' : 'text-gray-700'}>One lowercase letter</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className={`h-4 w-4 rounded-full flex items-center justify-center ${(hasNumber || hasSpecial) ? 'bg-green-100 border-green-500 border' : 'bg-gray-200 border-gray-400 border'}`}>
+                          {(hasNumber || hasSpecial) ? <span className="text-green-600 text-lg">●</span> : <span className="text-gray-400 text-lg">○</span>}
+                        </span>
+                        <span className={(hasNumber || hasSpecial) ? 'text-green-700' : 'text-gray-700'}>One number or special character</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
                 {/* Terms */}
