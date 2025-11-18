@@ -1,160 +1,227 @@
 "use client"
 
-import Link from "next/link"
+import { useState } from "react"
 
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
+	Card,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+	CardContent,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { cn } from "@/lib/utils"
 
 export default function ResetPasswordPage() {
-  return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-card rounded-3xl border shadow-sm overflow-hidden">
-        {/* LEFT SIDE – illustration + brand copy */}
-        <div className="px-10 py-12 flex items-center">
-          <div className="max-w-md space-y-8">
-            {/* Big lock in circle */}
-            <div className="flex justify-center">
-              <div className="relative inline-flex h-40 w-40 items-center justify-center rounded-full bg-primary/5">
-                <div className="h-20 w-20 rounded-2xl bg-primary/10 flex items-center justify-center">
-                  <span className="text-4xl text-primary">🔒</span>
-                </div>
-              </div>
-            </div>
+	const [password, setPassword] = useState("")
+	const [confirm, setConfirm] = useState("")
 
-            {/* Brand block */}
-            <div className="space-y-2 text-center lg:text-left">
-              <div className="inline-flex items-center gap-3">
-                <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground text-lg font-semibold">
-                  SK
-                </div>
-                <p className="font-semibold text-lg">StoreKeeper</p>
-              </div>
-              <p className="text-sm text-muted-foreground max-w-sm">
-                Create a strong password to secure your store management
-                account.
-              </p>
-            </div>
-          </div>
-        </div>
+	const hasLength = password.length >= 8
+	const hasUppercase = /[A-Z]/.test(password)
+	const hasLowercase = /[a-z]/.test(password)
+	const hasNumber = /[0-9]/.test(password)
+	const hasSpecial = /[^A-Za-z0-9]/.test(password)
 
-        {/* RIGHT SIDE – form + strength + rules */}
-        <div className="px-10 py-12 flex items-center bg-muted/20">
-          <Card className="w-full max-w-md mx-auto border-none shadow-none bg-transparent p-0">
-            <CardHeader className="px-0">
-              <div className="space-y-1">
-                <CardTitle className="text-2xl">Reset Your Password</CardTitle>
-                <CardDescription>
-                  Enter your new password below. Make sure it&apos;s strong and
-                  secure.
-                </CardDescription>
-              </div>
-            </CardHeader>
+	const checks = [hasLength, hasUppercase, hasLowercase, hasNumber || hasSpecial]
+	const passed = checks.filter(Boolean).length
 
-            <CardContent className="space-y-6 px-0">
-              <form className="space-y-4">
-                {/* New password */}
-                <div className="space-y-2">
-                  <Label htmlFor="new-password">New Password</Label>
-                  <Input
-                    id="new-password"
-                    type="password"
-                    placeholder="Enter new password"
-                  />
-                </div>
+	let strengthLabel = "Weak"
+	const strengthColors = ["bg-gray-200", "bg-gray-200", "bg-gray-200", "bg-gray-200"]
 
-                {/* Password strength row */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-medium text-foreground">
-                      Password strength
-                    </span>
-                    <span className="text-muted-foreground">Medium</span>
-                  </div>
-                </div>
-<div className="flex items-center gap-2 mt-1">
-  {/* Segment 1 – Red */}
-  <div className="h-1.5 w-1/4 rounded-full bg-red-500" />
+	if (passed === 1) {
+		strengthLabel = "Weak"
+		strengthColors[0] = "bg-red-500"
+	} else if (passed === 2) {
+		strengthLabel = "Medium"
+		strengthColors[0] = "bg-red-500"
+		strengthColors[1] = "bg-yellow-400"
+	} else if (passed === 3) {
+		strengthLabel = "Medium"
+		strengthColors[0] = "bg-red-500"
+		strengthColors[1] = "bg-yellow-400"
+		strengthColors[2] = "bg-yellow-400"
+	} else if (passed === 4) {
+		strengthLabel = "Strong"
+		strengthColors[0] = "bg-red-500"
+		strengthColors[1] = "bg-yellow-400"
+		strengthColors[2] = "bg-yellow-400"
+		strengthColors[3] = "bg-green-500"
+	}
 
-  {/* Segment 2 – Yellow */}
-  <div className="h-1.5 w-1/4 rounded-full bg-yellow-400" />
+	const strengthTextClass =
+		strengthLabel === "Strong"
+			? "text-green-700"
+			: strengthLabel === "Medium"
+			? "text-yellow-600"
+			: "text-red-700"
 
-  {/* Segment 3 – Grey */}
-  <div className="h-1.5 w-1/4 rounded-full bg-gray-200" />
+	const allValid = passed === 4 && password === confirm && password.length > 0
 
-  {/* Segment 4 – Grey */}
-  <div className="h-1.5 w-1/4 rounded-full bg-gray-200" />
-</div>
+	return (
+		<div className="min-h-screen bg-background flex items-center justify-center px-4 py-8">
+			<Card className="w-full max-w-xl border rounded-3xl shadow-sm">
+				<CardHeader className="px-8 pt-8 pb-4 flex flex-col items-center gap-4">
+					<div className="inline-flex items-center gap-3">
+						<div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+							<img src="/logo.png" alt="StoreKeeper logo" className="h-6 w-6" />
+						</div>
+						<span className="font-semibold text-lg">StoreKeeper</span>
+					</div>
 
+					<div className="text-center space-y-1">
+						<CardTitle className="text-2xl">Reset Your Password</CardTitle>
+						<CardDescription>
+							Enter your new password below. Make sure it&apos;s strong and secure.
+						</CardDescription>
+					</div>
+				</CardHeader>
 
-                {/* Confirm password */}
-                <div className="space-y-2">
-                  <Label htmlFor="confirm-password">Confirm Password</Label>
-                  <Input
-                    id="confirm-password"
-                    type="password"
-                    placeholder="Confirm new password"
-                  />
-                </div>
+				<CardContent className="px-8 pb-8 space-y-6">
+					<form className="space-y-4">
+						<div className="space-y-2">
+							<Label htmlFor="new-password">New Password</Label>
+							<Input
+								id="new-password"
+								type="password"
+								placeholder="Enter new password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+						</div>
 
-                {/* Password rules card */}
-                <div className="rounded-2xl bg-muted border px-4 py-4 space-y-3 text-xs">
-                  <p className="font-medium text-foreground">
-                    Password must contain:
-                  </p>
+						<div className="space-y-2">
+							<div className="flex items-center justify-between text-xs">
+								<span className="font-medium text-foreground">Password strength</span>
+								<span className={cn("font-semibold", strengthTextClass)}>
+									{strengthLabel}
+								</span>
+							</div>
 
-                  <div className="space-y-2 text-muted-foreground">
-                    {/* First rule – green with filled circle */}
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-green-500">
-                        <span className="h-2 w-2 rounded-full bg-white" />
-                      </span>
-                      <span>At least 8 characters</span>
-                    </div>
+							<div className="flex items-center gap-2 mt-1">
+								{strengthColors.map((color, index) => (
+									<div
+										key={index}
+										className={cn("h-1.5 w-1/4 rounded-full", color)}
+									/>
+								))}
+							</div>
+						</div>
 
-                    {/* Other rules – grey circles */}
-                    {[
-                      "One uppercase letter",
-                      "One lowercase letter",
-                      "One number or special character",
-                    ].map((rule) => (
-                      <div
-                        key={rule}
-                        className="flex items-center gap-2 text-muted-foreground"
-                      >
-                        <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-muted-foreground/40" />
-                        <span>{rule}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+						<div className="space-y-2">
+							<Label htmlFor="confirm-password">Confirm Password</Label>
+							<Input
+								id="confirm-password"
+								type="password"
+								placeholder="Confirm new password"
+								value={confirm}
+								onChange={(e) => setConfirm(e.target.value)}
+							/>
+						</div>
 
-                <Button type="submit" size="lg" className="w-full">
-                  Reset Password
-                </Button>
-              </form>
-            </CardContent>
+						<div className="rounded-2xl bg-muted border px-4 py-4 space-y-3 text-xs">
+							<p className="font-medium text-foreground">Password must contain:</p>
 
-            <CardFooter className="px-0 pt-4 flex flex-col items-center gap-2 text-xs text-muted-foreground">
-              <Link
-                href="/auth/signin"
-                className="inline-flex items-center gap-1 text-primary hover:underline"
-              >
-                ← Back to Sign In
-              </Link>
-              <p>Your password is encrypted and stored securely.</p>
-            </CardFooter>
-          </Card>
-        </div>
-      </div>
-    </div>
-  )
+							<div className="space-y-2 text-muted-foreground">
+								<div className="flex items-center gap-2">
+									<span
+										className={cn(
+											"inline-flex h-4 w-4 items-center justify-center rounded-full",
+											hasLength
+												? "bg-green-500"
+												: "bg-gray-200 border border-muted-foreground/40"
+										)}
+									>
+										{hasLength && <span className="h-2 w-2 rounded-full bg-white" />}
+									</span>
+									<span className={cn(hasLength ? "text-green-700" : "")}>
+										At least 8 characters
+									</span>
+								</div>
+
+								<div className="flex items-center gap-2">
+									<span
+										className={cn(
+											"inline-flex h-4 w-4 items-center justify-center rounded-full",
+											hasUppercase
+												? "bg-green-500"
+												: "bg-gray-200 border border-muted-foreground/40"
+										)}
+									>
+										{hasUppercase && (
+											<span className="h-2 w-2 rounded-full bg-white" />
+										)}
+									</span>
+									<span className={cn(hasUppercase ? "text-green-700" : "")}>
+										One uppercase letter
+									</span>
+								</div>
+
+								<div className="flex items-center gap-2">
+									<span
+										className={cn(
+											"inline-flex h-4 w-4 items-center justify-center rounded-full",
+											hasLowercase
+												? "bg-green-500"
+												: "bg-gray-200 border border-muted-foreground/40"
+										)}
+									>
+										{hasLowercase && (
+											<span className="h-2 w-2 rounded-full bg-white" />
+										)}
+									</span>
+									<span className={cn(hasLowercase ? "text-green-700" : "")}>
+										One lowercase letter
+									</span>
+								</div>
+
+								<div className="flex items-center gap-2">
+									<span
+										className={cn(
+											"inline-flex h-4 w-4 items-center justify-center rounded-full",
+											hasNumber || hasSpecial
+												? "bg-green-500"
+												: "bg-gray-200 border border-muted-foreground/40"
+										)}
+									>
+										{(hasNumber || hasSpecial) && (
+											<span className="h-2 w-2 rounded-full bg-white" />
+										)}
+									</span>
+									<span
+										className={cn(hasNumber || hasSpecial ? "text-green-700" : "")}
+									>
+										One number or special character
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<Button type="submit" size="lg" className="w-full" disabled={!allValid}>
+							<span className="inline-flex items-center gap-2">
+								<img src="/lock.png" alt="Lock icon" className="h-5 w-5" />
+								Reset Password
+							</span>
+						</Button>
+					</form>
+
+					<div className="flex flex-col items-center gap-3 pt-4">
+						<a
+							href="/login"
+							className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+						>
+							<span className="text-base">&#8592;</span>
+							Back to Sign In
+						</a>
+
+						<div className="flex items-center gap-2 text-xs text-muted-foreground mt-2">
+							<img src="/security.png" alt="Security icon" className="h-4 w-4" />
+							<span>Your password is encrypted and secure</span>
+						</div>
+					</div>
+				</CardContent>
+			</Card>
+		</div>
+	)
 }
