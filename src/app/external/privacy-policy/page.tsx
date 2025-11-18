@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const sections = [
   { id: "introduction", label: "1. Introduction" },
@@ -246,7 +246,7 @@ main(() => {
 
             {/* 10. Children's Privacy */}
             <section id="childrens-privacy" className="mb-10 scroll-mt-24">
-              <h2 className="text-2xl font-semibold mb-3">10. Children's Privacy</h2>
+              <h2 className="text-2xl font-semibold mb-3">10. Children&apos;s Privacy</h2>
               <p>
                 Our services are not intended for individuals under the age of 16. We do not knowingly collect personal
                 information from children under this age.

@@ -1,6 +1,6 @@
 import React from "react";
-import { IconType } from "react-icons";
-import { LucideIcon } from "lucide-react";
+// import { IconType } from "react-icons";
+// import { LucideIcon } from "lucide-react";
 
 import { IconCardProps } from "./types";
 

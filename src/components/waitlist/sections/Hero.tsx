@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import { FaRocket as FaRocketAlt } from "react-icons/fa6";
 import { MdNotifications } from "react-icons/md";
-import { FaCalendarCheck } from "react-icons/fa6";
-import { HiUserGroup } from "react-icons/hi2";
+// import { FaCalendarCheck } from "react-icons/fa6";
+// import { HiUserGroup } from "react-icons/hi2";
 import Button from "@/components/waitlist/ui/Button";
 import { PRIMARY_COLOR } from "@/lib/constants";
 

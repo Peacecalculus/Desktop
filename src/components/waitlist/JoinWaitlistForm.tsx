@@ -76,7 +76,7 @@ export default function JoinWaitlistForm({ handleFormSubmit }: JoinWaitlistFormP
               Join the Waitlist Now
             </Button>
             <p className="text-sm text-gray-500 mt-4">
-              We'll notify you as soon as we launch. No spam, ever.
+              We&apos;ll notify you as soon as we launch. No spam, ever.
             </p>
             <div className="pt-6 border-t border-gray-100 mt-6">
               <div
