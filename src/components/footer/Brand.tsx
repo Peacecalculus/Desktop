@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SocialIcon, PRIMARY_MAROON } from "./shared";
+import { PRIMARY_MAROON } from "./shared";
 
 export default function FooterBrand() {
   return (
@@ -25,12 +25,12 @@ export default function FooterBrand() {
         Smart inventory management made simple for modern businesses.
       </p>
 
-      <div className="flex space-x-3 mt-6">
+      {/* <div className="flex space-x-3 mt-6">
         <SocialIcon>f</SocialIcon>
         <SocialIcon>t</SocialIcon>
         <SocialIcon>in</SocialIcon>
         <SocialIcon>i</SocialIcon>
-      </div>
+      </div> */}
     </div>
   );
 }

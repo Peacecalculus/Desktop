@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 const sections = [
   { id: "introduction", label: "1. Introduction" },
@@ -20,7 +21,7 @@ const sections = [
 export default function PrivacyPolicyPage() {
   const [activeId, setActiveId] = useState<string>("introduction");
 
-main(() => {
+useEffect(() => {
     if (typeof window === "undefined") return;
 
     const observer = new IntersectionObserver(
