@@ -11,7 +11,6 @@ export default function Home() {
 	return (
 		<>
 			<WaitList />
-
 			<button onClick={() => router.push('/about')}>About</button>
 			<button onClick={() => router.push('/contact')}>Contact</button>
 		</>
