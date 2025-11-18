@@ -177,7 +177,7 @@ export default function SignupPage() {
   <div className="flex items-center gap-1">
     <span>Already have an account?</span>
     <Link
-      href="/login"
+      href="/auth/signin"
       className="text-primary font-medium hover:underline ml-1"
     >
       Sign in here

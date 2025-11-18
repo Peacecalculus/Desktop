@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 const sections = [
 	{ id: "introduction", label: "1. Introduction" },

@@ -145,7 +145,7 @@ export default function ResetPasswordPage() {
 
             <CardFooter className="px-0 pt-4 flex flex-col items-center gap-2 text-xs text-muted-foreground">
               <Link
-                href="/login"
+                href="/auth/signin"
                 className="inline-flex items-center gap-1 text-primary hover:underline"
               >
                 ← Back to Sign In
