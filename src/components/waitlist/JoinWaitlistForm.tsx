@@ -24,10 +24,7 @@ export default function JoinWaitlistForm({ handleFormSubmit }: JoinWaitlistFormP
         </p>
 
         <Card className="bg-white p-5 md:p-10 shadow-xl">
-          <form
-            onSubmit={handleFormSubmit}
-            className="space-y-4 md:space-y-6"
-          >
+          <form onSubmit={handleFormSubmit} className="space-y-4 md:space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 text-left mb-1">
@@ -69,12 +66,12 @@ export default function JoinWaitlistForm({ handleFormSubmit }: JoinWaitlistFormP
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full text-base md:text-lg py-3.5 mt-2 flex items-center justify-center gap-2"
-              style={{ backgroundColor: PRIMARY_COLOR }}
+              className={`w-full text-base md:text-lg py-3.5 mt-2 flex items-center justify-center gap-2 bg-[${PRIMARY_COLOR}] hover:bg-white hover:border-[#800020] border hover:text-[#800020] hover:cursor-pointer`}
             >
               <FaRocketAlt size={20} className="mr-1" />
               Join the Waitlist Now
             </Button>
+
             <p className="text-sm text-gray-500 mt-4">
               We&apos;ll notify you as soon as we launch. No spam, ever.
             </p>
