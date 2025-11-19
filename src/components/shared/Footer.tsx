@@ -21,10 +21,10 @@ export default function Footer() {
           <p>&copy; {currentYear} StockKeeper. All rights reserved.</p>
 
           <div className="flex space-x-6 mt-2 md:mt-0">
-            <Link href="#" className="hover:text-white transition-colors">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link href="#" className="hover:text-white transition-colors">
+            <Link href="/terms" className="hover:text-white transition-colors">
               Terms of Service
             </Link>
           </div>

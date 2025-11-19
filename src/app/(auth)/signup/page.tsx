@@ -30,16 +30,16 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Custom colors 
-  const PRIMARY_RED = "#800020"; 
-  const LIGHT_RED_BG = "#FDF2F4"; 
-  const LIGHT_RED_BORDER = "#F9D0D9"; 
+  // Custom colors
+  const PRIMARY_RED = "#800020";
+  const LIGHT_RED_BG = "#FDF2F4";
+  const LIGHT_RED_BORDER = "#F9D0D9";
   const SUCCESS_GREEN_BG = "#F0FDF4";
-  const SUCCESS_GREEN_BORDER = "#BBF7D0"; 
-  const TEXT_GRAY_MEDIUM = "#6B7280"; 
+  const SUCCESS_GREEN_BORDER = "#BBF7D0";
+  const TEXT_GRAY_MEDIUM = "#6B7280";
   const TEXT_GRAY_DARK = "#1F2937";
   const INPUT_BORDER_COLOR = "#D1D5DB";
-  const BORDER_DIVIDER = "#E5E7EB"; 
+  const BORDER_DIVIDER = "#E5E7EB";
 
   const isFormValid =
     fullName.trim() !== "" &&
@@ -360,17 +360,12 @@ export default function SignupPage() {
               </Button>
             </CardContent>
 
-            <CardFooter className="px-0 pt-4 flex flex-col items-center gap-4 text-xs text-muted-foreground bg-[#F9FAFB]">
-              <div className="flex items-center gap-1 text-sm">
-                <span className={`text-[${TEXT_GRAY_MEDIUM}]`}>
-                  Already have an account?
-                </span>
+            <CardFooter className="px-0 pt-4 flex flex-col items-center gap-4 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1">
+                <span>Already have an account?</span>
                 <Link
                   href="/signin"
-                  className={clsx(
-                    `text-[${PRIMARY_RED}]`,
-                    "font-medium hover:underline"
-                  )}
+                  className="text-primary font-medium hover:underline ml-1"
                 >
                   Sign in here
                 </Link>

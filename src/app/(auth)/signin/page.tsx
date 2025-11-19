@@ -3,19 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
-// React Icons
 import {
-  FiMail,
+  FiMail, 
   FiLock,
   FiCheckSquare,
-  // FiSquare,
   FiUsers,
 } from "react-icons/fi";
 import { FaClipboardCheck } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa6";
-import { GoHistory } from "react-icons/go"; 
+import { GoHistory } from "react-icons/go";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -66,7 +63,7 @@ export default function SignInPage() {
   return (
     <div className="min-h-screen  flex items-center justify-center p-4">
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
-        {/* LEFT SIDE */}
+        {/* LEFT SIDE  */}
         <div className={clsx("hidden lg:flex flex-col gap-8 p-10")}>
           <div className="relative w-full aspect-4/3 rounded-lg overflow-hidden">
             <Image
@@ -139,7 +136,7 @@ export default function SignInPage() {
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT SIDE  */}
         <div className="px-6 py-10 sm:px-8 flex items-center justify-center bg-[#F9FAFB]">
           <Card className="w-full border-none shadow-none p-0 max-w-sm mx-auto bg-[#F9FAFB]">
             <CardHeader className="px-0 bg-[#F9FAFB]">
@@ -170,7 +167,6 @@ export default function SignInPage() {
 
             <CardContent className="space-y-6 px-0 bg-[#F9FAFB]">
               <form className="space-y-4">
-                {/* Email Address */}
                 <div className="space-y-2">
                   <Label htmlFor="email" className={`text-[${TEXT_GRAY_DARK}]`}>
                     Email Address
@@ -185,7 +181,7 @@ export default function SignInPage() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="you@company.com" 
+                      placeholder="you@company.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className={clsx(
@@ -196,8 +192,6 @@ export default function SignInPage() {
                     />
                   </div>
                 </div>
-
-                {/* Password */}
                 <div className="space-y-2">
                   <Label
                     htmlFor="password"
@@ -313,10 +307,10 @@ export default function SignInPage() {
                   Dont have an account?
                 </span>
                 <Link
-                  href="/signup"
+                  href="/auth/signup"
                   className={clsx(
                     `text-[${PRIMARY_RED}]`,
-                    "font-medium hover:underline"
+                    "font-medium hover:underline text-sm leading-relaxed"
                   )}
                 >
                   Sign up for free
