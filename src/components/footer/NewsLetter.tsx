@@ -9,7 +9,7 @@ export default function NewsletterSection() {
         Get the latest updates and inventory management tips.
       </p>
 
-      <div className="flex">
+      <div className="flex gap-2 items-center">
         <input
           type="email"
           placeholder="Enter your email"
@@ -18,7 +18,7 @@ export default function NewsletterSection() {
         />
 
         <Button
-          className="py-3 px-6 rounded-r-md text-sm font-semibold whitespace-nowrap hover:brightness-110"
+          className="py-3 px-6 rounded-r-md text-sm font-semibold whitespace-nowrap hover:brightness-110 hover:cursor-pointer"
           style={{ backgroundColor: PRIMARY_MAROON, color: "white" }}
         >
           Subscribe
