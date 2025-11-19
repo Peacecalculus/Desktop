@@ -37,7 +37,7 @@ export default function SignupPage() {
   if (passed >= 3) { strengthLabel = "Strong"; strengthColor = "bg-green-500"; }
 
   return (
-    <div className="min-h-screen bg-[#ffffff] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#ffffff] flex items-center justify-center px-4 mb-8">
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-card rounded-xl border shadow-sm overflow-hidden">
         {/* LEFT SIDE */}
         <div className="bg-muted/40 px-8 py-10 flex flex-col gap-8">
