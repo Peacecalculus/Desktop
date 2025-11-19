@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -17,17 +18,29 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/ui/card";
+} from "@/components/ui/card"; // your real endpoint
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { signup, ApiResponse, SignupData } from "@/services/authService";
 
 function clsx(...args: unknown[]) {
   return args.filter(Boolean).join(" ");
 }
 
+interface SignupResponse {
+  status_code: number;
+  message?: string;
+  data?: Record<string, unknown>; // data is empty, no token
+}
+
 export default function SignupPage() {
+  const router = useRouter();
+
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Custom colors
   const PRIMARY_RED = "#800020";
@@ -45,6 +58,36 @@ export default function SignupPage() {
     email.trim() !== "" &&
     password.trim().length >= 8 &&
     agreedToTerms;
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+
+    setLoading(true);
+    try {
+      const res: ApiResponse<SignupData> = await signup({
+        name: fullName,
+        email,
+        password,
+      });
+
+      if (res.status_code === 200 && res.data?.token) {
+        localStorage.setItem("token", res.data.token);
+        toast.success("Signup successful!");
+        router.push("/onboarding");
+      } else {
+        toast.error(res.message || "Signup failed");
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Signup failed");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -186,7 +229,7 @@ export default function SignupPage() {
             </CardHeader>
 
             <CardContent className="space-y-6 px-0 bg-[#F9FAFB]">
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div className="space-y-2">
                   <Label
                     htmlFor="fullName"
@@ -273,7 +316,6 @@ export default function SignupPage() {
                   </p>
                 </div>
 
-                {/* T's and C's Baby*/}
                 <div className="flex items-center space-x-2">
                   <input
                     id="terms"
@@ -291,7 +333,7 @@ export default function SignupPage() {
                   <Label
                     htmlFor="terms"
                     className={clsx(
-                      "md:text-sm text-[8px] flex items-center justify-center font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      "md:text-sm text-[8px] flex items-center justify-center font-normal leading-none"
                     )}
                   >
                     I agree to the{" "}
@@ -326,9 +368,9 @@ export default function SignupPage() {
                     `bg-[${PRIMARY_RED}]`,
                     `hover:bg-[#6a001a]`
                   )}
-                  disabled={!isFormValid}
+                  disabled={!isFormValid || loading}
                 >
-                  Create Account
+                  {loading ? "Creating Account..." : "Create Account"}
                 </Button>
               </form>
 
@@ -370,7 +412,6 @@ export default function SignupPage() {
                 </Link>
               </div>
 
-              {/* Free trial banner */}
               <div
                 className={clsx(
                   "w-full rounded-lg py-3 md:px-4 px-1 flex items-center justify-center gap-2 md:text-sm text-[12px]",

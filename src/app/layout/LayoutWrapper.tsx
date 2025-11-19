@@ -16,9 +16,13 @@ export default function LayoutWrapper({
   const isAuthRoute =
     currentPath.startsWith("/signin") ||
     currentPath.startsWith("/signup") ||
+    currentPath.startsWith("/forgot-password") ||
     currentPath.startsWith("/reset-password") ||
     currentPath.startsWith("/reset-success") ||
+    currentPath.startsWith("/onboarding") ||
     currentPath.startsWith("/auth"); 
+    
+  
 
   return (
     <>
