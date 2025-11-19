@@ -4,6 +4,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import LayoutFooter from "./LayoutFooter";
 import LayoutHeader from "./LayoutHeader";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 export default function LayoutWrapper({
   children,
@@ -22,9 +23,7 @@ export default function LayoutWrapper({
   return (
     <>
       {!isAuthRoute && <LayoutHeader />}
-
-      {children}
-
+      <ProtectedRoute>{children}</ProtectedRoute>
       {!isAuthRoute && <LayoutFooter />}
     </>
   );
