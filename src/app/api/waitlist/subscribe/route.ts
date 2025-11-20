@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(data, { status: upstreamResponse.status });
   } catch (error: unknown) {
-    console.error('[Waitlist Proxy] Failed:', error.message);
+    console.error('[Waitlist Proxy] Failed:', (error as Error).message);
 
     return NextResponse.json(
       {

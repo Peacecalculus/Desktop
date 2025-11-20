@@ -28,7 +28,7 @@ export default function OnboardingPage() {
             </div>
             <div>
               <h1 className="text-xl font-bold text-gray-900">StockKeeper</h1>
-              <p className="text-xs text-gray-500">Inventory Management</p>
+              <span className='text-xs text-[#800020]'>Inventory Management</span>
             </div>
           </div>
           <div className="flex items-center gap-4">
