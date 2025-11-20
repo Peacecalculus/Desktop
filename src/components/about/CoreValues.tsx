@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Heart, Zap, Shield, Sparkles, Target, Users } from 'lucide-react';
+import { PRIMARY_COLOR, ACCENT_COLOR } from '@/lib/constants';
 
 const values = [
 	{
@@ -49,9 +50,12 @@ export default function CoreValues() {
 					{values.map(({ icon: Icon, title, desc }) => (
 						<Card
 							key={title}
-							className='bg-gray-50 border-0 rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-500 ease-in-out transform hover:-translate-y-1'>
-							<div className='bg-[#F9D0D9] w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-6'>
-								<Icon className='w-8 h-8 text-[#800020]' />
+							className='bg-gray-50 border-0 rounded-3xl p-8 text-center hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1'>
+							<div
+								className='w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-6'
+								style={{ backgroundColor: ACCENT_COLOR }}
+							>
+								<Icon className='w-8 h-8' style={{ color: PRIMARY_COLOR }} />
 							</div>
 							<h4 className='text-xl font-bold text-gray-900 mb-3'>
 								{title}

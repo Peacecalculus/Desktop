@@ -1,30 +1,41 @@
-import { Button } from '@/components/ui/button';
+import Link from 'next/link'
+import React from 'react'
+import { Button } from '@/components/ui/button'
 
-export default function FinalCTA() {
-	return (
-		<section className='bg-[#800020] py-20'>
-			<div className='max-w-4xl mx-auto px-6 text-center text-white'>
-				<h2 className='text-4xl md:text-5xl font-bold mb-6'>
-					Join Us on Our Journey
-				</h2>
-				<p className='text-xl text-red-100 mb-10 max-w-2xl mx-auto'>
-					Whether youre looking to transform your inventory management
-					or just want to say hi, we&apos;d love to hear from you.
-				</p>
-				<div className='flex flex-col sm:flex-row gap-6 justify-center'>
-					<Button
-						size='lg'
-						className='bg-white text-[#800020] hover:bg-gray-100 px-10 h-14 text-lg font-bold rounded-xl transition-all duration-500 ease-in-out transform hover:scale-105'>
-						Start Free Trial
-					</Button>
-					<Button
-						size='lg'
-						variant='outline'
-						className='border-white text-white hover:bg-white/10 px-10 h-14 text-lg font-bold rounded-xl transition-all duration-500 ease-in-out transform hover:scale-105'>
-						Get in Touch
-					</Button>
-				</div>
-			</div>
-		</section>
-	);
+const FinalCTA: React.FC = () => {
+  return (
+    <section className='bg-[#800020] py-24 text-white'>
+      <div className='max-w-7xl mx-auto px-6'>
+        <div className='text-center space-y-6'>
+          <h2 className='text-4xl md:text-5xl font-extrabold tracking-tight'>
+            Ready to Transform Your Inventory?
+          </h2>
+          <p className='text-lg md:text-xl text-white/80'>
+            Join businesses that are saving time, reducing errors, and improving visibility with StockKeeper.
+          </p>
+        </div>
+
+        <div className='mt-10 flex flex-col sm:flex-row items-center justify-center gap-4'>
+          <Link href='/waitlist'>
+            <Button
+              className='cursor-pointer bg-[#fff] text-[#800020] border border-[#800020] hover:bg-[#800020] hover:text-white hover:border-[#fff] px-10 h-14 text-lg font-bold rounded-xl transition-all duration-300 ease-in-out transform hover:scale-101'
+            >
+              Start Free Trial
+            </Button>
+          </Link>
+
+          <Link href='/contact'>
+            <Button
+              variant='outline'
+              className='cursor-pointer border-white text-white bg-transparent hover:bg-white hover:text-[#800020] hover:border-[#800020] px-10 h-14 text-lg font-bold rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105'
+            >
+              Get in Touch
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
 }
+
+export default FinalCTA
