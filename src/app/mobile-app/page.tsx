@@ -338,59 +338,62 @@ export default function MobileAppPage() {
   
   {/* ================= SEE IT IN ACTION ================= */}
   <motion.section
-    variants={sectionVariants}
+  variants={sectionVariants}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.3 }}
+  className="border-t border-slate-100 px-6 py-10 md:px-10 md:py-14 bg-white"
+>
+  <div className="mx-auto max-w-4xl text-center">
+    <h2 className="text-[30px] font-bold text-[#111827] leading-snug">
+      See It In Action
+    </h2>
+    <p className="mt-2 text-[15px] text-[#4B5563]">
+      A glimpse of the StockKeeper mobile experience.
+    </p>
+  </div>
+
+  <motion.div
+    variants={staggerContainer}
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true, amount: 0.3 }}
-    className="border-t border-slate-100 px-6 py-10 md:px-10 md:py-14 bg-white"
+    viewport={{ once: true, amount: 0.2 }}
+    className="mx-auto mt-10 grid max-w-5xl gap-6 md:grid-cols-3"
   >
-    <div className="mx-auto max-w-4xl text-center">
-      <h2 className="text-[30px] font-bold text-[#111827] leading-snug">
-        See It In Action
-      </h2>
-      <p className="mt-2 text-[15px] text-[#4B5563]">
-        A glimpse of the StockKeeper mobile experience.
-      </p>
-    </div>
-  
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      className="mx-auto mt-10 grid max-w-5xl gap-6 md:grid-cols-3"
-    >
-      {actionShots.map((shot) => (
+    {actionShots.map((shot) => (
+      <motion.div
+        key={shot.title}
+        variants={staggerItem}
+        className="flex flex-col items-center text-center"
+      >
+        {/* hover ONLY on the image */}
         <motion.div
-          key={shot.title}
-          variants={staggerItem}
           whileHover={{
             scale: 1.03,
-            y: -4,
-            boxShadow: "0 24px 60px rgba(15,23,42,0.22)",
+            boxShadow: "0 12px 28px rgba(15,23,42,0.15)", // softer shadow
           }}
-          transition={{ type: "spring", stiffness: 250, damping: 20 }}
-          className="flex flex-col items-center text-center"
+          transition={{ type: "spring", stiffness: 220, damping: 20 }}
+          className="relative w-full max-w-xs aspect-3/5 overflow-hidden rounded-3xl bg-slate-100 shadow-[0_10px_24px_rgba(15,23,42,0.12)]"
         >
-          <div className="relative w-full max-w-xs aspect-3/5 overflow-hidden rounded-3xl bg-slate-100 shadow-[0_22px_40px_rgba(15,23,42,0.18)]">
-            <Image
-              src={shot.image}
-              alt={shot.title}
-              fill
-              className="object-cover"
-            />
-          </div>
-          <p className="mt-4 text-sm font-semibold text-slate-900">
-            {shot.title}
-          </p>
-          <p className="mt-1 max-w-80 text-[12px] leading-6 text-[#4B5563]">
-            {shot.description}
-          </p>
+          <Image
+            src={shot.image}
+            alt={shot.title}
+            fill
+            className="object-cover"
+          />
         </motion.div>
-      ))}
-    </motion.div>
-  </motion.section>
-  
+
+        <p className="mt-4 text-sm font-semibold text-slate-900">
+          {shot.title}
+        </p>
+        <p className="mt-1 max-w-80 text-[12px] leading-6 text-[#4B5563]">
+          {shot.description}
+        </p>
+      </motion.div>
+    ))}
+  </motion.div>
+</motion.section>
+
   {/* ================= TESTIMONIALS ================= */}
   <motion.section
     variants={sectionVariants}
