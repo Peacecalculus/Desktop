@@ -41,8 +41,6 @@ export default function SignupPage() {
 
   // Custom colors
   const PRIMARY_RED = "#800020";
-  const LIGHT_RED_BG = "#FDF2F4";
-  const LIGHT_RED_BORDER = "#F9D0D9";
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const SUCCESS_GREEN_BG = "#F0FDF4";
   const SUCCESS_GREEN_BORDER = "#BBF7D0";
@@ -62,87 +60,107 @@ export default function SignupPage() {
     return errors;
   };
 
+  // Handlers for input change to clear errors dynamically
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
+    // Real-time validation check for feedback
     const pwdErrors = validatePasswordRules(newPassword);
     setPasswordErrors(pwdErrors);
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+    // Clear inline error when user starts typing in email field
     setErrors({});
   };
 
-  const handleResendVerification = async (userEmail: string) => {
-    try {
-      const res = await resendVerification({ email: userEmail });
-      if (res.status_code === 200) {
-        toast.success("Verification email resent!", {
-          description: "Check your inbox and spam folder again.",
-        });
-      } else {
-        toast.error(res.message || "Failed to resend email.");
-      }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        toast.error(err.message);
-      } else {
-        toast.error("Could not reach server to resend email.");
-      }
-    }
-  };
+ const handleResendVerification = async (userEmail: string) => {
+   try {
+     const res = await resendVerification({ email: userEmail });
+     if (res.status_code === 200) {
+       toast.success("Verification email resent!", {
+         description: "Check your inbox and spam folder again.",
+       });
+     } else {
+       toast.error(res.message || "Failed to resend email.");
+     }
+   } catch (err: unknown) {
+     if (err instanceof Error) {
+       toast.error(err.message);
+     } else {
+       toast.error("Could not reach server to resend email.");
+     }
+   }
+ };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+ const handleSubmit = async (e: React.FormEvent) => {
+   e.preventDefault();
 
-    const pwdErrors = validatePasswordRules(password);
-    if (pwdErrors.length > 0) {
-      setPasswordErrors(pwdErrors);
-      return;
-    } else {
-      setPasswordErrors([]);
-    }
+   // Re-validate password just before submission
+   const pwdErrors = validatePasswordRules(password);
+   if (pwdErrors.length > 0) {
+     setPasswordErrors(pwdErrors);
+     return; // stop submission if password invalid
+   } else {
+     setPasswordErrors([]);
+   }
 
-    if (!isFormValid) return;
+   if (!isFormValid) return;
 
-    setLoading(true);
-    setErrors({});
+   setLoading(true);
+   setErrors({}); // reset errors before submit
 
-    try {
-      const res: ApiResponse<SignupData> = await signup({
-        name: fullName,
-        email,
-        password,
-      });
+   try {
+     const res: ApiResponse<SignupData> = await signup({
+       name: fullName,
+       email,
+       password,
+     });
 
-      if (res.status_code === 200) {
-        toast.success("Account created successfully. Please sign in to continue.", {
-          description: res.message || "Check your email inbox to verify your account.",
-          action: {
-            label: "Resend Link",
-            onClick: () => handleResendVerification(email),
-          },
-          duration: 10000,
-        });
+     // --- 🔑 MODIFIED LOGIC: Account created, prompt for sign-in AND offer resend link 🔑 ---
+     if (res.status_code === 200) {
+       // This logic runs because the backend successfully created the account (status 200)
+       // but is NOT sending the token, hence the need for verification.
 
-        setTimeout(() => router.push("/signin"), 1000);
-      } else {
-        toast.error(res.message || "Signup failed");
-        if (res.message?.toLowerCase().includes("email")) {
-          setErrors({ email: res.message });
-        }
-      }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        toast.error(err.message);
-      } else {
-        toast.error("Signup failed");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+       // 1. Show the success message and prompt to sign-in.
+       // 2. Add an action button to the toast that calls handleResendVerification.
+       toast.success(
+         "Account created successfully. Please sign in to continue.",
+         {
+           description:
+             res.message || "Check your email inbox to verify your account.",
+           // Add the action button here!
+           action: {
+             label: "Resend Link",
+             onClick: () => handleResendVerification(email),
+           },
+           duration: 10000, // Keep the toast visible longer
+         }
+       );
+
+       // Redirect to the sign-in page after a short delay (so the toast is visible)
+       setTimeout(() => router.push("/signin"), 1000);
+     } else {
+       // API FAILURE HANDLING (Status code is not 200)
+       toast.error(res.message || "Signup failed"); // 👈 TOAST ERROR
+       if (res.message?.toLowerCase().includes("email")) {
+         // 👈 INLINE EMAIL ERROR
+         setErrors({ email: res.message });
+       }
+     }
+     // --- END MODIFIED LOGIC ---
+   } catch (err: unknown) {
+     // NETWORK/OTHER ERROR HANDLING
+     if (err instanceof Error) {
+       toast.error(err.message);
+     } else {
+       toast.error("Signup failed"); // 👈 GENERIC TOAST ERROR
+     }
+   } finally {
+     setLoading(false);
+   }
+ };
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-0">
@@ -159,17 +177,10 @@ export default function SignupPage() {
                 <Image src="/logo.png" alt="StockKeeper Logo" width={32} height={32} className="h-8 w-8 object-cover" />
               </div>
               <div>
-                <p className={clsx("font-semibold text-lg", `text-[${TEXT_GRAY_DARK}]`)}>StockKeeper</p>
               </div>
             </div>
 
             <div className="space-y-2">
-              <h2 className={clsx("text-2xl font-bold leading-snug", `text-[${TEXT_GRAY_DARK}]`)}>Transform Your Inventory Management</h2>
-              <p className={clsx("text-sm", `text-[${TEXT_GRAY_MEDIUM}]`)}>Join thousands of businesses streamlining their stock operations with our powerful platform.</p>
-            </div>
-
-            <div className={clsx("rounded-lg p-5 space-y-3", `bg-[${LIGHT_RED_BG}]`, `border-[${LIGHT_RED_BORDER}]`, "border")}>
-              <p className={clsx("font-medium text-sm", `text-[${TEXT_GRAY_DARK}]`)}>Everything you need to manage stock:</p>
               <ul className="space-y-2 text-sm">
                 {[
                   "Real-time inventory tracking across multiple locations",
@@ -306,16 +317,19 @@ export default function SignupPage() {
                   </Label>
                 </div>
 
+                {/* SUBMIT BUTTON (UPDATED CLASSNAMES FOR LOADING STATE) */}
                 <Button
                   type="submit"
                   size="lg"
                   className={clsx("w-full text-white transition-colors duration-200", `bg-[${PRIMARY_RED}]`, `hover:bg-[#6a001a]`, loading && "opacity-75 cursor-not-allowed")}
                   disabled={!isFormValid || loading}
                 >
+                  {/* 👈 LOADING TEXT */}
                   {loading ? "Creating Account..." : "Create Account"}
                 </Button>
               </form>
 
+              {/* OR CONTINUE WITH GOOGLE (UNCHANGED) */}
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
                 <div className={clsx("h-px flex-1", `bg-[${BORDER_DIVIDER}]`)} />
                 <span className={`text-[${TEXT_GRAY_MEDIUM}]`}>Or continue with</span>

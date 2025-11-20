@@ -1,3 +1,4 @@
+// Corrected and Cleaned Code
 "use client";
 
 import { useState, useMemo, useCallback, useEffect } from "react";
