@@ -10,7 +10,9 @@ import WhyStockKeeper from "@/components/home/sections/WhyStockKeeper"
 
 const page = () => {
   return (
+    
     <div>
+      <p className="text-gray-500 text-sm">Loading...</p>
         <HomeHero />
         <KeyMetrics />
         <EverythingYouNeedToKnow />

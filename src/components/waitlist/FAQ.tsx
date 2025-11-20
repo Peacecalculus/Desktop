@@ -17,7 +17,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
       >
         <span className="text-sm md:text-base pr-4">{question}</span>
         <ChevronDown
-          className={`w-5 h-5 transition-transform duration-300 text-gray-500 ${
+          className={`w-5 h-5 transition-transform duration-300 text-gray-500 hover:cursor-pointer ${
             isOpen ? "rotate-180" : "rotate-0"
           }`}
         />

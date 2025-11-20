@@ -1,13 +1,9 @@
 "use client";
-
+import { forgotPassword } from "@/services/authService";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  FiMail,
-  FiInfo,
-  FiChevronLeft,
-} from "react-icons/fi";
+import { FiMail, FiInfo, FiChevronLeft } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import { FaShieldAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
@@ -28,17 +24,19 @@ function clsx(...args: unknown[]) {
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [message, setMessage] = useState("");
 
   // Custom colors 
   const PRIMARY_RED = "#800020";
-  const LIGHT_RED_BG = "#FDF2F4";
-  const LIGHT_RED_BORDER = "#F9D0D9";
   const TEXT_GRAY_MEDIUM = "#6B7280";
   const TEXT_GRAY_DARK = "#1F2937";
   const INPUT_BORDER_COLOR = "#D1D5DB";
 
-
   const isFormValid = email.trim() !== "";
+  const isLoading = status === "sending";
 
   const steps = [
     "Enter your registered email address",
@@ -46,6 +44,32 @@ export default function ForgotPasswordPage() {
     "Create a new secure password",
     "Sign in with your new password",
   ];
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isFormValid || isLoading) return;
+
+    setStatus("sending");
+    setMessage(""); 
+
+    try {
+      const response = await forgotPassword({ email });
+      setStatus("success");
+      setMessage(
+        response.message ||
+          "Password reset link sent successfully! Check your email."
+      );
+    } catch (error: unknown) {
+      setStatus("error");
+      const errorMessage =
+        (error as Error).message || "An unknown error occurred.";
+
+      setMessage(
+        errorMessage ||
+          "Failed to send reset link. Please check your email and try again."
+      );
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -92,13 +116,11 @@ export default function ForgotPasswordPage() {
               quickly and securely.
             </p>
           </div>
-
-          {/* Password Reset Process Box */}
           <div
             className={clsx(
               "rounded-lg p-6 space-y-4",
-              `bg-[${LIGHT_RED_BG}]`,
-              `border-[${LIGHT_RED_BORDER}]`,
+              `bg-[#FDF2F4]`,
+              `border-[#F9D0D9]`,
               "border"
             )}
           >
@@ -158,7 +180,7 @@ export default function ForgotPasswordPage() {
             </CardHeader>
 
             <CardContent className="space-y-6 px-0 bg-[#F9FAFB]">
-              <form className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="email" className={`text-[${TEXT_GRAY_DARK}]`}>
                     Email Address
@@ -181,6 +203,8 @@ export default function ForgotPasswordPage() {
                         `border-[${INPUT_BORDER_COLOR}]`,
                         `focus-visible:ring-offset-0 focus-visible:ring-2 focus-visible:ring-[${PRIMARY_RED}]`
                       )}
+                      disabled={isLoading || status === "success"}
+                      required
                     />
                   </div>
                   <p className={clsx("text-xs", `text-[${TEXT_GRAY_MEDIUM}]`)}>
@@ -196,11 +220,28 @@ export default function ForgotPasswordPage() {
                     `bg-[${PRIMARY_RED}]`,
                     `hover:bg-[#6a001a]`
                   )}
-                  disabled={!isFormValid}
+                  disabled={!isFormValid || isLoading || status === "success"}
                 >
-                  Send Reset Link
+                  {isLoading ? "Sending..." : "Send Reset Link"}
                 </Button>
               </form>
+              {message && (
+                <div
+                  className={clsx(
+                    "rounded-lg p-3 text-sm font-semibold",
+                    {
+                      "bg-green-100 border-green-300 text-green-700":
+                        status === "success",
+                      "bg-red-100 border-red-300 text-red-700":
+                        status === "error",
+                    },
+                    "border"
+                  )}
+                >
+                  {message}
+                </div>
+              )}
+
               <div
                 className={clsx(
                   "rounded-lg p-3 flex gap-3 text-sm border",
@@ -256,7 +297,7 @@ export default function ForgotPasswordPage() {
                   Dont have an account?
                 </span>
                 <Link
-                  href="/auth/signup"
+                  href="/signup"
                   className={clsx(
                     `text-[${PRIMARY_RED}]`,
                     "font-medium hover:underline"

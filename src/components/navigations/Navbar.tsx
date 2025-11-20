@@ -3,17 +3,17 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import DesktopNav from "../navigations/DesktopNav";
-import MobileNav from "../navigations/MobileNav";
-import { PRIMARY_MAROON } from "../navigations/shared";
+import DesktopNav from "./DesktopNav";
+import MobileNav from "./MobileNav";
+import { PRIMARY_MAROON } from "./shared";
 
-export default function Navigation() {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
       <div className="container mx-auto px-4">
-        {/* Mobile Layout: Logo + Menu Icon */}
+        {/* Mobile Layout */}
         <div className="flex items-center justify-between lg:hidden h-16">
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <div
