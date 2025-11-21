@@ -9,7 +9,7 @@ export default function NotFound() {
         <div className="p-12 rounded-lg text-black">
           <div className="flex justify-center mb-6">
             <Image
-              src="/four-box.png"
+              src="/assets/four-box.png"
               alt="User icon"
               width={52}
               height={52}

@@ -23,19 +23,19 @@ export default function WaitlistPage() {
     joinSection?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Waitlist form submitted!");
+  // const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   console.log("Waitlist form submitted!");
 
-    const messageBox = document.getElementById("waitlist-message-box");
-    if (messageBox) {
-      messageBox.textContent = "✅ Success! You have joined the waitlist.";
-      messageBox.classList.remove("hidden");
-      messageBox.classList.add("block");
-      setTimeout(() => messageBox.classList.remove("block"), 5000);
-      setTimeout(() => messageBox.classList.add("hidden"), 5300);
-    }
-  };
+  //   const messageBox = document.getElementById("waitlist-message-box");
+  //   if (messageBox) {
+  //     messageBox.textContent = "✅ Success! You have joined the waitlist.";
+  //     messageBox.classList.remove("hidden");
+  //     messageBox.classList.add("block");
+  //     setTimeout(() => messageBox.classList.remove("block"), 5000);
+  //     setTimeout(() => messageBox.classList.add("hidden"), 5300);
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-white font-inter">

@@ -78,7 +78,7 @@ export default function ForgotPasswordPage() {
         <div className={clsx("hidden lg:flex flex-col gap-10 px-10 py-10")}>
           <div className="flex flex-col items-center justify-center pt-8">
             <Image
-              src="/forgot-pass-key.png"
+              src="/assets/forgot-pass-key.png"
               alt="User icon"
               width={52}
               height={52}
@@ -88,7 +88,7 @@ export default function ForgotPasswordPage() {
           <div className="text-center space-y-2">
             <div className="flex items-center justify-center gap-3">
               <Image
-                src="/logo.png"
+                src="/assets/logo.png"
                 alt="StoreKeeper Logo"
                 width={26}
                 height={26}

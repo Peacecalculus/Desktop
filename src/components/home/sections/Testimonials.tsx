@@ -27,19 +27,19 @@ const TESTIMONIALS = [
     text: `StockKeeper transformed how we manage inventory. We've reduced stockouts by 90% and saved countless hours. The real-time tracking is a game-changer!`,
     name: "Michael Chen",
     role: "CEO, TechRetail Co.",
-    img: "/michael-chen.png",
+    img: "/assets/michael-chen.png",
   },
   {
     text: `The mobile app is fantastic! I can check stock levels and update inventory from anywhere. Customer support is incredibly responsive and helpful.`,
     name: "Sarah Johnson",
     role: "Operations Manager, FreshMart",
-    img: "/sarah.png",
+    img: "/assets/sarah.png",
   },
   {
     text: `Setup was incredibly easy. We had our entire inventory running within an hour. The reporting features give us insights we never had before.`,
     name: "David Martinez",
     role: "Founder, GadgetHub",
-    img: "/david.png",
+    img: "/assets/david.png",
   },
 ];
 

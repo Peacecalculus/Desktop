@@ -13,21 +13,21 @@ const steps = [
     title: "Sign Up Free",
     description:
       "Create your account in seconds. No credit card required for your 14-day free trial.",
-    image: "/sign-up-image.png",
+    image: "/assets/sign-up-image.png",
   },
   {
     number: 2,
     title: "Add Your Products",
     description:
       "Import your inventory via CSV or add products manually. Bulk upload supported.",
-    image: "/add-product-image.png",
+    image: "/assets/add-product-image.png",
   },
   {
     number: 3,
     title: "Start Managing",
     description:
       "Track stock, set alerts, generate reports, and optimize your inventory effortlessly.",
-    image: "/manage-inventory-image.png",
+    image: "/assets/manage-inventory-image.png",
   },
 ];
 

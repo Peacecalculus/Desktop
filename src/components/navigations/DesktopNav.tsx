@@ -15,7 +15,7 @@ export default function DesktopNav() {
           style={{ backgroundColor: PRIMARY_MAROON }}
         >
           <Image
-            src="/logo.png"
+            src="/assets/logo.png"
             alt="StockKeeper Logo"
             width={32}
             height={32}

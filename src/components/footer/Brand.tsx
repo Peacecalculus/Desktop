@@ -32,7 +32,7 @@ export default function FooterBrand() {
           style={{ backgroundColor: PRIMARY_MAROON }}
         >
           <Image
-            src="/logo.png"
+            src="/assets/logo.png"
             alt="StockKeeper Logo"
             width={24}
             height={24}

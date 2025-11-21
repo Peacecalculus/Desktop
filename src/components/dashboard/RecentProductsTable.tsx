@@ -126,7 +126,7 @@ export default function RecentProductsTable() {
                     <div
                       className={`w-12 h-12 rounded-xl ${
                         product.iconBg ?? "bg-gray-100"
-                      } flex items-center justify-center text-2xl flex-shrink-0`}
+                      } flex items-center justify-center text-2xl shrink-0`}
                     >
                       {product.icon ?? "📦"}
                     </div>

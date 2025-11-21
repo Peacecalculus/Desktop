@@ -41,9 +41,6 @@ export default function SignupPage() {
 
   // Custom colors
   const PRIMARY_RED = "#800020";
-  const LIGHT_RED_BG = "#FDF2F4";
-  const LIGHT_RED_BORDER = "#F9D0D9";
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const SUCCESS_GREEN_BG = "#F0FDF4";
   const SUCCESS_GREEN_BORDER = "#BBF7D0";
   const TEXT_GRAY_MEDIUM = "#6B7280";
@@ -117,14 +114,18 @@ export default function SignupPage() {
       });
 
       if (res.status_code === 200) {
-        toast.success("Account created successfully. Please sign in to continue.", {
-          description: res.message || "Check your email inbox to verify your account.",
-          action: {
-            label: "Resend Link",
-            onClick: () => handleResendVerification(email),
-          },
-          duration: 10000,
-        });
+        toast.success(
+          "Account created successfully. Please sign in to continue.",
+          {
+            description:
+              res.message || "Check your email inbox to verify your account.",
+            action: {
+              label: "Resend Link",
+              onClick: () => handleResendVerification(email),
+            },
+            duration: 10000,
+          }
+        );
 
         setTimeout(() => router.push("/signin"), 1000);
       } else {
@@ -159,17 +160,10 @@ export default function SignupPage() {
                 <Image src="/logo.png" alt="StockKeeper Logo" width={32} height={32} className="h-8 w-8 object-cover" />
               </div>
               <div>
-                <p className={clsx("font-semibold text-lg", `text-[${TEXT_GRAY_DARK}]`)}>StockKeeper</p>
               </div>
             </div>
 
             <div className="space-y-2">
-              <h2 className={clsx("text-2xl font-bold leading-snug", `text-[${TEXT_GRAY_DARK}]`)}>Transform Your Inventory Management</h2>
-              <p className={clsx("text-sm", `text-[${TEXT_GRAY_MEDIUM}]`)}>Join thousands of businesses streamlining their stock operations with our powerful platform.</p>
-            </div>
-
-            <div className={clsx("rounded-lg p-5 space-y-3", `bg-[${LIGHT_RED_BG}]`, `border-[${LIGHT_RED_BORDER}]`, "border")}>
-              <p className={clsx("font-medium text-sm", `text-[${TEXT_GRAY_DARK}]`)}>Everything you need to manage stock:</p>
               <ul className="space-y-2 text-sm">
                 {[
                   "Real-time inventory tracking across multiple locations",
