@@ -60,48 +60,45 @@ export default function SignInPage() {
     },
   ];
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  if (!isFormValid) return;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isFormValid) return;
 
-  setLoading(true);
+    setLoading(true);
 
-  try {
-    // Call login without generic type - it already returns ApiResponse<LoginData>
-    const res = await login({ email, password });
+    try {
+      const res = await login({ email, password });
 
-    if (res.status_code === 200 && res.data?.token) {
-      // Save token if rememberMe is true
-      if (rememberMe) {
-        localStorage.setItem("token", res.data.token);
+      if (res.status_code === 200 && res.data?.token) {
+        if (rememberMe) {
+          localStorage.setItem("token", res.data.token);
+        }
+
+        toast.success("Login successful!");
+        // Navigate to onboarding
+        router.push("/onboarding");
+      } else {
+        // Handle invalid credentials or user not found
+        toast.error(res.message || "User does not exist");
       }
-
-      toast.success("Login successful!");
-      // Navigate to onboarding
-      router.push("/onboarding");
-    } else {
-      // Handle invalid credentials or user not found
-      toast.error(res.message || "User does not exist");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error(err);
+        toast.error(err.message || "Login failed");
+      } else {
+        console.error("Unexpected error:", err);
+        toast.error("Login failed");
+      }
+    } finally {
+      setLoading(false);
     }
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      console.error(err);
-      toast.error(err.message || "Login failed");
-    } else {
-      console.error("Unexpected error:", err);
-      toast.error("Login failed");
-    }
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+    <div className="min-h-screen bg-white flex items-center justify-center p-0">
+      <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
         {/* LEFT SIDE */}
-        <div className={clsx("hidden lg:flex flex-col gap-8 p-10")}>
+        <div className={clsx("hidden lg:flex flex-col gap-8 px-10 py-10")}>
           <div className="relative w-full aspect-4/3 rounded-lg overflow-hidden">
             <Image
               src="/inventory-management.png"
@@ -111,7 +108,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             />
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-6 ml-10">
             <div className="flex items-center gap-3">
               <div
                 className={clsx(
@@ -143,7 +140,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 ">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-4">
                   <feature.icon
@@ -174,8 +171,8 @@ const handleSubmit = async (e: React.FormEvent) => {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="px-6 py-10 sm:px-8 flex items-center justify-center bg-[#F9FAFB]">
-          <Card className="w-full border-none shadow-none p-0 max-w-sm mx-auto bg-[#F9FAFB]">
+        <div className="flex items-center justify-center bg-[#F9FAFB]">
+          <Card className="w-full border-none shadow-none px-6 py-10 max-w-sm mx-auto bg-[#F9FAFB]">
             <CardHeader className="px-0 bg-[#F9FAFB]">
               <div className="flex flex-col items-center gap-4">
                 <div
@@ -333,9 +330,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   `hover:bg-gray-50`
                 )}
               >
-                <FaGoogle
-                  className={clsx("mr-2 h-4 w-4", `text-[${TEXT_GRAY_DARK}]`)}
-                />
+                <FaGoogle className={clsx("mr-2 h-4 w-4", `text-[#EF4444]`)} />
                 Continue with Google
               </Button>
             </CardContent>
@@ -346,7 +341,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   Dont have an account?
                 </span>
                 <Link
-                  href="/auth/signup"
+                  href="/signup"
                   className={clsx(
                     `text-[${PRIMARY_RED}]`,
                     "font-medium hover:underline text-sm leading-relaxed"

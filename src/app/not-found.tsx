@@ -4,11 +4,9 @@ import Image from "next/image";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-[#121212] text-white flex flex-col justify-center items-center p-4">
+    <div className="min-h-screen flex flex-col justify-center items-center p-4">
       <div className="max-w-xl text-center">
-        {/* Container styled like your screenshot's central box */}
-        <div className="bg-white p-12 rounded-lg shadow-xl text-black">
-          {/* Red Box Icon Area */}
+        <div className="p-12 rounded-lg text-black">
           <div className="flex justify-center mb-6">
             <Image
               src="/four-box.png"
@@ -26,15 +24,15 @@ export default function NotFound() {
           </p>
 
           <div className="flex justify-center space-x-4">
-            <Link href="/" passHref legacyBehavior>
-              <a className="px-6 py-3 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition duration-150">
+            <Link href="/" >
+              <div className="px-6 py-3 bg-[#800020] text-white rounded-md hover:border hover:border-[#800020] hover:bg-white  transition duration-150 hover:text-[#800020]">
                 ← Back to Home
-              </a>
+              </div>
             </Link>
-            <Link href="/contact" passHref legacyBehavior>
-              <a className="px-6 py-3 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition duration-150">
+            <Link href="/contact">
+              <div className="px-6 py-3 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition duration-150">
                 Contact Us
-              </a>
+              </div>
             </Link>
           </div>
         </div>
