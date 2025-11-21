@@ -52,7 +52,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: ".next/*,public/*,package.json,package-lock.json"
+          source: ".next/*,public/*,package.json,package-lock.json,next.config.*"
           target: "/var/www/stock-keeping-dev"
           strip_components: 0
 
