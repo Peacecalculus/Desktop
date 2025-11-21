@@ -51,7 +51,7 @@ export default function WaitlistPage() {
 			<Countdown launchDate={launchDate} />
 			<Benefits />
 			<Features />
-			<JoinWaitlistForm handleFormSubmit={handleFormSubmit} />
+			<JoinWaitlistForm />
 			<FAQ />
 			<Footer />
 		</div>

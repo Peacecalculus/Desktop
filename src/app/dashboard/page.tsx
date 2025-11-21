@@ -1,20 +1,17 @@
 // app/dashboard/page.tsx  (or components/Dashboard.tsx)
 "use client";
 
-import { 
-  Home, Package, FolderOpen, BarChart3, Settings, Plus, 
-  Search, ChevronLeft, ChevronRight, MoreVertical, Edit, Trash2, Eye
-} from "lucide-react";
-import { LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { BarChart3, ChevronLeft, ChevronRight, Edit, Eye, FolderOpen, Home, Package, Plus, Settings, Trash2 } from "lucide-react";
+import { CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const lineData = [
   { name: "Mon", stock: 2800 },
   { name: "Tue", stock: 2650 },
-  { name: "Wed", 2550 },
-  { name: "Thu", 2480 },
-  { name: "Fri", 2420 },
-  { name: "Sat", 2380 },
-  { name: "Sun", 2400 },
+  { name: "Wed", stock: 2550 },
+  { name: "Thu", stock: 2480 },
+  { name: "Fri", stock: 2420 },
+  { name: "Sat", stock: 2380 },
+  { name: "Sun", stock: 2400 },
 ];
 
 const pieData = [
@@ -56,12 +53,7 @@ export default function Dashboard() {
 
         <nav className="flex-1 p-4">
           {menuItems.map((item, i) => (
-            <button
-              key={i}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-all ${
-                item.active ? "bg-white/20 shadow-lg" : "hover:bg-white/10"
-              }`}
-            >
+            <button key={i} className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-all ${item.active ? "bg-white/20 shadow-lg" : "hover:bg-white/10"}`}>
               <item.icon className="w-5 h-5" />
               <span className="font-medium">{item.label}</span>
             </button>
@@ -84,7 +76,7 @@ export default function Dashboard() {
         <header className="bg-white shadow-sm border-b border-gray-200 px-8 py-6 flex justify-between items-center">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Dashboard Overview</h2>
-            <p className="text-gray-600">Welcome back, John! Here's your inventory summary.</p>
+            <p className="text-gray-600">Welcome back, John! Here&apos;s your inventory summary.</p>
           </div>
           <button className="bg-[#800020] text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 hover:bg-[#6b001a] transition">
             <Plus className="w-5 h-5" />
@@ -104,15 +96,9 @@ export default function Dashboard() {
               <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between mb-4">
                   <div className={`w-12 h-12 rounded-xl bg-${stat.color}-100 flex items-center justify-center`}>
-                    {stat.alert ? (
-                      <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse" />
-                    ) : (
-                      <div className="w-8 h-8 bg-gray-400 rounded" />
-                    )}
+                    {stat.alert ? <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse" /> : <div className="w-8 h-8 bg-gray-400 rounded" />}
                   </div>
-                  <span className={`text-sm font-medium ${stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
-                    {stat.change}
-                  </span>
+                  <span className={`text-sm font-medium ${stat.change.startsWith("+") ? "text-green-600" : "text-red-600"}`}>{stat.change}</span>
                 </div>
                 <p className="text-gray-600 text-sm">{stat.label}</p>
                 <p className="text-3xl font-bold text-gray-900 mt-1">{stat.value}</p>
@@ -130,14 +116,16 @@ export default function Dashboard() {
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={lineData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
-                  <XAxis dataKey="name" tick={{ fill: '#9ca3af' }} />
-                  <YAxis tick={{ fill: '#9ca3af' }} />
+                  <XAxis dataKey="name" tick={{ fill: "#9ca3af" }} />
+                  <YAxis tick={{ fill: "#9ca3af" }} />
                   <Tooltip />
-                  <Line type="monotone" dataKey="stock" stroke="#800020" strokeWidth={3} dot={{ fill: '#800020' }} />
+                  <Line type="monotone" dataKey="stock" stroke="#800020" strokeWidth={3} dot={{ fill: "#800020" }} />
                 </LineChart>
               </ResponsiveContainer>
               <div className="flex items-center justify-center gap-4 mt-4 text-sm">
-                <span className="flex items-center gap-2"><div className="w-3 h-3 bg-[#800020] rounded-full"></div> Total Stock</span>
+                <span className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-[#800020] rounded-full"></div> Total Stock
+                </span>
               </div>
             </div>
 
@@ -148,15 +136,7 @@ export default function Dashboard() {
               </div>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
-                  <Pie
-                    data={pieData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={100}
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
+                  <Pie data={pieData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={5} dataKey="value">
                     {pieData.map((entry, i) => (
                       <Cell key={`cell-${i}`} fill={entry.color} />
                     ))}
@@ -186,9 +166,7 @@ export default function Dashboard() {
                 <p className="text-red-700">127 products are running low on stock and need restocking.</p>
               </div>
             </div>
-            <button className="bg-[#800020] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#6b001a]">
-              View Items
-            </button>
+            <button className="bg-[#800020] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#6b001a]">View Items</button>
           </div>
 
           {/* Recent Products */}
@@ -223,20 +201,25 @@ export default function Dashboard() {
                       <td className="p-6 text-gray-600">{product.category}</td>
                       <td className="p-6 font-medium">{product.qty} units</td>
                       <td className="p-6">
-                        <span className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${
-                          product.status === "in-stock" ? "bg-green-100 text-green-800" :
-                          product.status === "low-stock" ? "bg-red-100 text-red-800" :
-                          "bg-yellow-100 text-yellow-800"
-                        }`}>
-                          {product.status === "in-stock" ? "In Stock" :
-                           product.status === "low-stock" ? "Low Stock" : "Medium"}
+                        <span
+                          className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${
+                            product.status === "in-stock" ? "bg-green-100 text-green-800" : product.status === "low-stock" ? "bg-red-100 text-red-800" : "bg-yellow-100 text-yellow-800"
+                          }`}
+                        >
+                          {product.status === "in-stock" ? "In Stock" : product.status === "low-stock" ? "Low Stock" : "Medium"}
                         </span>
                       </td>
                       <td className="p-6">
                         <div className="flex items-center gap-2">
-                          <button className="p-2 hover:bg-gray-100 rounded-lg"><Eye className="w-4 h-4" /></button>
-                          <button className="p-2 hover:bg-gray-100 rounded-lg"><Edit className="w-4 h-4" /></button>
-                          <button className="p-2 hover:bg-gray-100 rounded-lg"><Trash2 className="w-4 h-4 text-red-600" /></button>
+                          <button className="p-2 hover:bg-gray-100 rounded-lg">
+                            <Eye className="w-4 h-4" />
+                          </button>
+                          <button className="p-2 hover:bg-gray-100 rounded-lg">
+                            <Edit className="w-4 h-4" />
+                          </button>
+                          <button className="p-2 hover:bg-gray-100 rounded-lg">
+                            <Trash2 className="w-4 h-4 text-red-600" />
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -247,11 +230,15 @@ export default function Dashboard() {
             <div className="p-6 bg-gray-50 border-t border-gray-200 flex justify-between items-center">
               <p className="text-sm text-gray-600">Showing 1 to 5 of 2,847 products</p>
               <div className="flex items-center gap-2">
-                <button className="p-2 hover:bg-white rounded-lg border"><ChevronLeft className="w-5 h-5" /></button>
+                <button className="p-2 hover:bg-white rounded-lg border">
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
                 <button className="px-3 py-1 bg-[#800020] text-white rounded-lg text-sm">1</button>
                 <button className="px-3 py-1 hover:bg-gray-200 rounded-lg text-sm">2</button>
                 <button className="px-3 py-1 hover:bg-gray-200 rounded-lg text-sm">3</button>
-                <button className="p-2 hover:bg-white rounded-lg border"><ChevronRight className="w-5 h-5" /></button>
+                <button className="p-2 hover:bg-white rounded-lg border">
+                  <ChevronRight className="w-5 h-5" />
+                </button>
               </div>
             </div>
           </div>

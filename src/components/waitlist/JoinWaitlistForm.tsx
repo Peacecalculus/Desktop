@@ -82,7 +82,7 @@ export default function JoinWaitlistForm() {
 			clearTimeout(timeoutId); // Always clean up
 
 			// Timeout error
-			if (error.name === "AbortError") {
+			if ((error as Error).name === "AbortError") {
 				console.warn("Request timed out after 10 seconds");
 				toast.error("Request timed out. Please check your connection.");
 				router.push("/waitlist/error");

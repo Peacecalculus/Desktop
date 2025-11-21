@@ -23,8 +23,8 @@ jobs:
       - name: Install dependencies
         run: npm ci || npm install
 
-      - name: Lint code (do not fail)
-        run: npm run lint || true
+      - name: Lint code
+        run: npm run lint
 
-      - name: Build project (do not fail)
-        run: npm run build || true
+      - name: Build project
+        run: npm run build

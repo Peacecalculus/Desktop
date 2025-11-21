@@ -1,16 +1,19 @@
-"use client";
-
 import { CheckCircle2, Mail, Bell, Gift, Share2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 import Button from "@/components/waitlist/ui/Button";
 
 const PRIMARY_COLOR = "#800020";
 
-export default function WaitlistSuccess() {
-	const searchParams = useSearchParams();
-	const isReturning = searchParams.get("type") === "returning";
+type WaitlistSuccessProps = {
+	searchParams?: Promise<{
+		type?: string;
+	}>;
+};
+
+export default async function WaitlistSuccess(props: WaitlistSuccessProps) {
+	const searchParams = await props.searchParams;
+	const isReturning = searchParams?.type === "returning";
 
 	return (
 		<div className="min-h-screen bg-white flex items-center justify-center px-4 py-12">
