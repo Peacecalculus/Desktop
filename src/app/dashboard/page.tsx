@@ -1,5 +1,10 @@
-import DashboardShell from '@/components/dashboard/DashboardShell';
+import { InventoryProvider } from "@/contexts/InventoryDataContext";
+import DashboardShell from "@/components/dashboard/DashboardShell";
 
 export default function DashboardPage() {
-	return <DashboardShell />;
+  return (
+    <InventoryProvider>
+      <DashboardShell />
+    </InventoryProvider>
+  );
 }

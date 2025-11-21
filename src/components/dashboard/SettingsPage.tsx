@@ -1,3 +1,4 @@
+"use client";
 import { Settings } from 'lucide-react';
 
 export default function SettingsPage() {
