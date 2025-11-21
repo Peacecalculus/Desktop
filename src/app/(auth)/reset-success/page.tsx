@@ -67,7 +67,7 @@ export default function PasswordResetSuccessPage() {
           <div className="flex flex-col items-center justify-center pt-8">
             <div className="relative w-48 h-48 rounded-lg overflow-hidden">
               <Image
-                src="/success-bag.png"
+                src="/assets/success-bag.png"
                 alt="A dark blue backpack representing inventory"
                 width={192}
                 height={192}
@@ -80,7 +80,7 @@ export default function PasswordResetSuccessPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-center gap-3">
               <Image
-                src="/logo.png"
+                src="/assets/logo.png"
                 alt="StoreKeeper Logo"
                 width={28}
                 height={28}

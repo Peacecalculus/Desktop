@@ -39,27 +39,31 @@ async function postRequest<T>(endpoint: string, body: Record<string, unknown>, h
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function getRequest<T>(endpoint: string, params?: Record<string, string>): Promise<ApiResponse<T>> {
-  const url = new URL(`${BASE_URL}${endpoint}`);
+// async function getRequest<T>(
+//   endpoint: string,
+//   params?: Record<string, string>
+// ): Promise<ApiResponse<T>> {
+//   const url = new URL(`${BASE_URL}${endpoint}`);
 
-  if (params) {
-    Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
-  }
+//   if (params) {
+//     Object.keys(params).forEach((key) =>
+//       url.searchParams.append(key, params[key])
+//     );
+//   }
 
-  const response = await fetch(url.toString(), { method: "GET" });
+//   const response = await fetch(url.toString(), { method: "GET" });
 
-  if (!response.ok) {
-    try {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "An error occurred");
-    } catch {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-  }
+//   if (!response.ok) {
+//     try {
+//       const errorData = await response.json();
+//       throw new Error(errorData.message || "An error occurred");
+//     } catch {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//   }
 
-  return response.json() as Promise<ApiResponse<T>>;
-}
+//   return response.json() as Promise<ApiResponse<T>>;
+// }
 
 // ---------- AUTH RESPONSE TYPES -----------
 

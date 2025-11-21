@@ -32,12 +32,20 @@ function clsx(...args: unknown[]) {
   return args.filter(Boolean).join(" ");
 }
 
+<<<<<<< HEAD
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface SignupResponse {
   status_code: number;
   message?: string;
   data?: Record<string, unknown>;
 }
+=======
+// interface SignupResponse {
+//   status_code: number;
+//   message?: string;
+//   data?: Record<string, unknown>;
+// }
+>>>>>>> 77a5f40 (fix: correct image paths, restructure onboarding & landing page)
 
 export default function SignupPage() {
   const router = useRouter();
@@ -52,8 +60,14 @@ export default function SignupPage() {
 
   // Custom colors
   const PRIMARY_RED = "#800020";
+<<<<<<< HEAD
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const SUCCESS_GREEN_BG = "#F0FDF4";
+=======
+  const LIGHT_RED_BG = "#FDF2F4";
+  const LIGHT_RED_BORDER = "#F9D0D9";
+
+>>>>>>> 77a5f40 (fix: correct image paths, restructure onboarding & landing page)
   const SUCCESS_GREEN_BORDER = "#BBF7D0";
   const TEXT_GRAY_MEDIUM = "#6B7280";
   const TEXT_GRAY_DARK = "#1F2937";
@@ -172,13 +186,38 @@ export default function SignupPage() {
         {/* LEFT SIDE - PROMOTIONAL */}
         <div className={clsx("hidden lg:flex flex-col gap-8 px-10 py-10")}>
           <div className="relative w-full aspect-4/3 rounded-lg overflow-hidden">
+<<<<<<< HEAD
             <Image src="/inventory-management.png" alt="Warehouse shelves with stock inventory" fill className="object-cover" />
+=======
+            <Image
+              src="/assets/inventory-management.png"
+              alt="Warehouse shelves with stock inventory"
+              fill
+              className="object-cover"
+            />
+>>>>>>> 77a5f40 (fix: correct image paths, restructure onboarding & landing page)
           </div>
 
           <div className="space-y-6 ml-10">
             <div className="flex items-center gap-3">
+<<<<<<< HEAD
               <div className={clsx("inline-flex h-10 w-10 items-center justify-center rounded-lg text-white", `bg-[${PRIMARY_RED}]`)}>
                 <Image src="/logo.png" alt="StockKeeper Logo" width={32} height={32} className="h-8 w-8 object-cover" />
+=======
+              <div
+                className={clsx(
+                  "inline-flex h-10 w-10 items-center justify-center rounded-lg text-white",
+                  `bg-[${PRIMARY_RED}]`
+                )}
+              >
+                <Image
+                  src="/assets/logo.png"
+                  alt="StockKeeper Logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 object-cover"
+                />
+>>>>>>> 77a5f40 (fix: correct image paths, restructure onboarding & landing page)
               </div>
               <div>
               </div>

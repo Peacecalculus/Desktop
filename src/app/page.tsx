@@ -1,46 +1,31 @@
-"use client";
+import CTA from "@/components/home/sections/CTA";
+import EverythingYouNeedToKnow from "@/components/home/sections/EverythingYouNeedToKnow";
+import FAQ from "@/components/home/sections/FAQ";
+import GetStarted from "@/components/home/sections/GetStarted";
+import HomeHero from "@/components/home/sections/HomeHero";
+import KeyMetrics from "@/components/home/sections/KeyMetrics";
+import Testimonials from "@/components/home/sections/Testimonials";
+import WhyStockKeeper from "@/components/home/sections/WhyStockKeeper";
+import LayoutFooter from "./layout/LayoutFooter";
+import LayoutHeader from "./layout/LayoutHeader";
 
-import React, { useState } from "react";
-import Header from "@/components/waitlist/Header";
-import Hero from "@/components/waitlist/sections/Hero";
-import Preview from "@/components/waitlist/sections/Preview";
-import Countdown from "@/components/waitlist/sections/Countdown";
-import Benefits from "@/components/waitlist/sections/Benefits";
-import Features from "@/components/waitlist/sections/Features";
-import JoinWaitlistForm from "@/components/waitlist/JoinWaitlistForm";
-import FAQ from "@/components/waitlist/FAQ";
-import Footer from "@/components/waitlist/Footer";
+const page = () => {
+  return (
+    <div className="w-full">
+      <div className="max-w-[1920px] mx-auto">
+      <LayoutHeader />
+        <HomeHero />
+        <KeyMetrics />
+        <EverythingYouNeedToKnow />
+        <GetStarted />
+        <WhyStockKeeper />
+        <Testimonials />
+        <FAQ />
+        <CTA />
+        <LayoutFooter />
+      </div>
+    </div>
+  );
+};
 
-
-export default function WaitlistPage() {
-	const [launchDate] = useState(() => {
-		const date = new Date();
-		date.setDate(date.getDate() + 45);
-		return date;
-	});
-
-	const handleScrollToJoin = () => {
-		const joinSection = document.getElementById("join");
-		joinSection?.scrollIntoView({ behavior: "smooth" });
-	};
-
-	return (
-		<div className="min-h-screen bg-white font-inter">
-			<div
-				id="waitlist-message-box"
-				className="hidden fixed top-20 left-1/2 -translate-x-1/2 z-100 p-3 rounded-lg bg-green-100 text-green-800 font-medium shadow-xl transition-all duration-300"
-			>
-				Success message placeholder
-			</div>
-			<Header handleScrollToJoin={handleScrollToJoin} />
-			<Hero handleScrollToJoin={handleScrollToJoin} />
-			<Preview />
-			<Countdown launchDate={launchDate} />
-			<Benefits />
-			<Features />
-			<JoinWaitlistForm />
-			<FAQ />
-			<Footer />
-		</div>
-	);
-}
+export default page;

@@ -70,7 +70,7 @@ const WhyStockKeeper = () => {
     >
       {/* IMAGE */}
       <Image
-        src="/business-handshake-partnership-image.png"
+        src="/assets/business-handshake-partnership-image.png"
         alt="Handshake"
         width={380}
         height={275}

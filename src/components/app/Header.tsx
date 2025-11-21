@@ -1,4 +1,4 @@
-import { Bell, Mail, Package } from "lucide-react";
+import { Bell, Mail} from "lucide-react";
 import React, { useState } from "react";
 import { Invitation } from "./constants";
 import Image from "next/image";

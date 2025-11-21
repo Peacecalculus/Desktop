@@ -101,7 +101,7 @@ export default function SignInPage() {
         <div className={clsx("hidden lg:flex flex-col gap-8 px-10 py-10")}>
           <div className="relative w-full aspect-4/3 rounded-lg overflow-hidden">
             <Image
-              src="/inventory-management.png"
+              src="/assets/inventory-management.png"
               alt="Warehouse shelves with stock inventory"
               fill
               className="object-cover"
@@ -117,7 +117,7 @@ export default function SignInPage() {
                 )}
               >
                 <Image
-                  src="/logo.png"
+                  src="/assets/logo.png"
                   alt="StockKeeper Logo"
                   width={32}
                   height={32}

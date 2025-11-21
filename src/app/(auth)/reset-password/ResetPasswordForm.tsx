@@ -182,7 +182,7 @@ export default function ResetPasswordForm() {
           <div className="flex flex-col items-center justify-center pt-16">
             <div className="relative w-40 h-40 ">
               <Image
-                src="/reset-pass-lock.png"
+                src="/assets/reset-pass-lock.png"
                 alt="User icon"
                 width={52}
                 height={52}
@@ -193,7 +193,7 @@ export default function ResetPasswordForm() {
           <div className="space-y-4">
             <div className="flex items-center justify-center gap-3">
               <Image
-                src="/logo.png"
+                src="/assets/logo.png"
                 alt="StoreKeeper Logo"
                 width={28}
                 height={28}
