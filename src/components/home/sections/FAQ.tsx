@@ -10,14 +10,18 @@ export type { FAQItemProps };
 const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="rounded-xl bg-gray-50 shadow-sm transition-all duration-300 hover:shadow-md p-4 sm:p-5 border border-gray-100">
+    <div
+      className="rounded-xl bg-gray-50 shadow-sm transition-all duration-300 hover:shadow-md p-4 sm:p-5 border border-gray-100 hover:cursor-pointer"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
       <button
-        className="flex justify-between items-center w-full text-left font-semibold text-gray-800 hover:text-gray-900"
+        className="flex justify-between items-center w-full text-left font-semibold text-gray-800 hover:text-gray-900 hover:cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-sm md:text-base pr-4">{question}</span>
         <ChevronDown
-          className={`w-5 h-5 transition-transform duration-300 text-gray-500 ${
+          className={`w-5 h-5 transition-transform duration-300 text-gray-500 hover:cursor-pointer ${
             isOpen ? "rotate-180" : "rotate-0"
           }`}
         />

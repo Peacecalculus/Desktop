@@ -14,7 +14,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       styles += ` bg-[${PRIMARY_COLOR}] text-white hover:bg-opacity-90`;
     } else if (variant === "secondary") {
       styles += ` bg-white text-[${PRIMARY_COLOR}] border border-[${PRIMARY_COLOR}] hover:bg-gray-50`;
-    }
+    } 
     return (
       <button ref={ref} className={`${styles} ${className}`} {...props}>
         {children}

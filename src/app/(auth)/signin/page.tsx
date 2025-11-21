@@ -3,14 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  FiMail, 
-  FiLock,
-  FiCheckSquare,
-  FiUsers,
-} from "react-icons/fi";
-import { FaClipboardCheck } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { FiMail, FiLock, FiCheckSquare, FiUsers } from "react-icons/fi";
+import { FaClipboardCheck, FaGoogle } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa6";
 import { GoHistory } from "react-icons/go";
 import { Button } from "@/components/ui/button";
@@ -24,15 +19,20 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
+import { login } from "@/services/authService";
+import { toast } from "sonner";
 
 function clsx(...args: unknown[]) {
   return args.filter(Boolean).join(" ");
 }
 
 export default function SignInPage() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const PRIMARY_RED = "#800020";
   const TEXT_GRAY_MEDIUM = "#6B7280";
@@ -60,11 +60,45 @@ export default function SignInPage() {
     },
   ];
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+
+    setLoading(true);
+
+    try {
+      const res = await login({ email, password });
+
+      if (res.status_code === 200 && res.data?.token) {
+        if (rememberMe) {
+          localStorage.setItem("token", res.data.token);
+        }
+
+        toast.success("Login successful!");
+        // Navigate to onboarding
+        router.push("/onboarding");
+      } else {
+        // Handle invalid credentials or user not found
+        toast.error(res.message || "User does not exist");
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error(err);
+        toast.error(err.message || "Login failed");
+      } else {
+        console.error("Unexpected error:", err);
+        toast.error("Login failed");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen  flex items-center justify-center p-4">
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
-        {/* LEFT SIDE  */}
-        <div className={clsx("hidden lg:flex flex-col gap-8 p-10")}>
+    <div className="min-h-screen bg-white flex items-center justify-center p-0">
+      <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+        {/* LEFT SIDE */}
+        <div className={clsx("hidden lg:flex flex-col gap-8 px-10 py-10")}>
           <div className="relative w-full aspect-4/3 rounded-lg overflow-hidden">
             <Image
               src="/inventory-management.png"
@@ -73,7 +107,8 @@ export default function SignInPage() {
               className="object-cover"
             />
           </div>
-          <div className="space-y-6">
+
+          <div className="space-y-6 ml-10">
             <div className="flex items-center gap-3">
               <div
                 className={clsx(
@@ -105,8 +140,7 @@ export default function SignInPage() {
               </div>
             </div>
 
-            {/* Feature List */}
-            <div className="space-y-4">
+            <div className="space-y-4 ">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-4">
                   <feature.icon
@@ -136,9 +170,9 @@ export default function SignInPage() {
           </div>
         </div>
 
-        {/* RIGHT SIDE  */}
-        <div className="px-6 py-10 sm:px-8 flex items-center justify-center bg-[#F9FAFB]">
-          <Card className="w-full border-none shadow-none p-0 max-w-sm mx-auto bg-[#F9FAFB]">
+        {/* RIGHT SIDE */}
+        <div className="flex items-center justify-center bg-[#F9FAFB]">
+          <Card className="w-full border-none shadow-none px-6 py-10 max-w-sm mx-auto bg-[#F9FAFB]">
             <CardHeader className="px-0 bg-[#F9FAFB]">
               <div className="flex flex-col items-center gap-4">
                 <div
@@ -166,7 +200,7 @@ export default function SignInPage() {
             </CardHeader>
 
             <CardContent className="space-y-6 px-0 bg-[#F9FAFB]">
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div className="space-y-2">
                   <Label htmlFor="email" className={`text-[${TEXT_GRAY_DARK}]`}>
                     Email Address
@@ -192,6 +226,7 @@ export default function SignInPage() {
                     />
                   </div>
                 </div>
+
                 <div className="space-y-2">
                   <Label
                     htmlFor="password"
@@ -220,6 +255,7 @@ export default function SignInPage() {
                     />
                   </div>
                 </div>
+
                 <div className="flex items-center justify-between text-xs pt-1">
                   <div className="flex items-center space-x-2">
                     <div
@@ -264,9 +300,9 @@ export default function SignInPage() {
                     `bg-[${PRIMARY_RED}]`,
                     `hover:bg-[#6a001a]`
                   )}
-                  disabled={!isFormValid}
+                  disabled={!isFormValid || loading}
                 >
-                  Sign In
+                  {loading ? "Signing In..." : "Sign In"}
                 </Button>
               </form>
 
@@ -294,9 +330,7 @@ export default function SignInPage() {
                   `hover:bg-gray-50`
                 )}
               >
-                <FaGoogle
-                  className={clsx("mr-2 h-4 w-4", `text-[${TEXT_GRAY_DARK}]`)}
-                />
+                <FaGoogle className={clsx("mr-2 h-4 w-4", `text-[#EF4444]`)} />
                 Continue with Google
               </Button>
             </CardContent>
@@ -307,7 +341,7 @@ export default function SignInPage() {
                   Dont have an account?
                 </span>
                 <Link
-                  href="/auth/signup"
+                  href="/signup"
                   className={clsx(
                     `text-[${PRIMARY_RED}]`,
                     "font-medium hover:underline text-sm leading-relaxed"

@@ -13,8 +13,14 @@ import { BsGraphUp } from "react-icons/bs";
 import Image from "next/image";
 import Button from "../ui/Button";
 
+const PRIMARY_COLOR = "#800020";
+
 const HomeHero = () => {
   const heroRef = useRef<HTMLDivElement | null>(null);
+
+  const handleScrollToJoin = () => {
+    console.log("Scrolling to join section...");
+  };
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -69,10 +75,29 @@ const HomeHero = () => {
     >
       {/* TEXT CONTENT */}
       <div className="flex flex-col justify-center gap-6 lg:w-1/2">
-        <div className="hero-badge w-fit rounded-4xl bg-[#FCE7EB] px-4 py-2">
-          <p className="flex items-center gap-1 text-sm font-semibold text-[#800020]">
-            <FaGift /> <span>Start Your 14-Day Free Trial Today</span>
-          </p>
+        <div
+          onClick={handleScrollToJoin}
+          className="bg-[#FCE7EB] font-bold text-xs sm:text-[14px] flex items-center justify-center rounded-3xl w-auto max-w-xs sm:max-w-md p-2 mb-4 sm:mb-6 cursor-pointer hero-badge"
+          style={{
+            color: PRIMARY_COLOR,
+            animation: "pulseScaleShadow 2s infinite",
+          }}
+        >
+          <FaGift className="mr-2 h-4 w-4" />
+          Launching Soon - Reserve Your Spot Now
+          <style jsx>{`
+            @keyframes pulseScaleShadow {
+              0%,
+              100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(252, 231, 235, 0.5);
+              }
+              50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px 10px rgba(252, 231, 235, 0.5);
+              }
+            }
+          `}</style>
         </div>
 
         <h1 className="hero-heading text-4xl font-bold leading-tight text-[#111827] md:text-5xl">
@@ -86,11 +111,11 @@ const HomeHero = () => {
         </p>
 
         <div className="hero-buttons flex flex-col gap-4 md:flex-row">
-          <Button className="flex items-center justify-center gap-2 py-4 font-semibold">
+          <Button className="flex items-center justify-center gap-2 py-4 font-semibold hover:cursor-pointer hover:border border-[#800020] hover:text-[#800020] hover:bg-white">
             <FaRocket /> Start Free Trial – No Credit Card
           </Button>
 
-          <Button className="bg-[#D1D5DB] py-4 hover:bg-[#c3c7cd] transition">
+          <Button className="bg-[#D1D5DB] py-4 hover:bg-[#c3c7cd] transition hover:cursor-pointer hover:border-[#374151] border">
             <span className="flex items-center justify-center gap-2 font-semibold text-[#374151]">
               <FaCirclePlay /> Watch Demo
             </span>
@@ -98,69 +123,62 @@ const HomeHero = () => {
         </div>
 
         <div className="mt-2 flex flex-wrap items-center gap-3 md:gap-4">
-          {["No credit card required", "14-day free trial", "Cancel anytime"].map(
-            (text, i) => (
-              <div
-                key={i}
-                className="hero-checks flex items-center gap-2 text-sm text-[#4B5563]"
-              >
-                <FaCircleCheck className="text-[#22C55E]" /> <span>{text}</span>
-              </div>
-            )
-          )}
+          {[
+            "No credit card required",
+            "14-day free trial",
+            "Cancel anytime",
+          ].map((text, i) => (
+            <div
+              key={i}
+              className="hero-checks flex items-center gap-2 text-sm text-[#4B5563]"
+            >
+              <FaCircleCheck className="text-[#22C55E]" /> <span>{text}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* HERO IMAGES */}
-      <div className="relative lg:w-1/2">
-        <Image
-          src="/home-hero.png"
-          alt="Inventory management dashboard"
-          width={380}
-          height={285}
-          className="hero-image md:hidden"
-          priority
-        />
+      {/* HERO IMAGE WITH OVERLAYS */}
+      <div className="relative lg:w-1/2 hero-image">
+        <div className="relative rounded-xl overflow-hidden">
+          <Image
+            src="/assets/hero-image-desktop.png"
+            alt="Inventory management dashboard"
+            width={1200}
+            height={900}
+            className="w-full h-auto object-cover"
+            priority
+          />
 
-        <Image
-          src="/hero-image-tablet.png"
-          alt="Inventory management dashboard"
-          width={720}
-          height={540}
-          className="hero-image hidden md:block lg:hidden"
-          priority
-        />
-
-        <Image
-          src="/hero-image-desktop.png"
-          alt="Inventory management dashboard"
-          width={616}
-          height={462}
-          className="hero-image hidden lg:block"
-          priority
-        />
-
-        {/* USERS OVERLAY */}
-        <div className="hero-overlay absolute right-2 top-0 flex items-center gap-2 rounded-xl bg-[#800020] p-6 text-white shadow-lg">
-          <div className="rounded-full bg-white/20 p-3">
-            <FaUsers size={24} />
+          {/* USERS OVERLAY */}
+          <div
+            className="hero-overlay absolute top-4 right-4 sm:top-7 sm:right-12 text-white text-xs sm:text-sm font-semibold shadow-lg flex items-center p-3 sm:p-4 rounded-lg sm:rounded-xl gap-2"
+            style={{ backgroundColor: PRIMARY_COLOR }}
+          >
+            <div className="bg-white/20 p-2 sm:p-3 rounded-full">
+              <FaUsers size={16} />
+            </div>
+            <div>
+              <p className="font-bold text-lg sm:text-[24px]">5,000+</p>
+              <p className="font-medium text-[10px] sm:text-[14px]">
+                Happy Users
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-lg font-bold sm:text-2xl">5,000+</p>
-            <p className="text-[11px] sm:text-sm">Happy Users</p>
-          </div>
-        </div>
 
-        {/* ACCURACY OVERLAY */}
-        <div className="hero-overlay absolute bottom-4 left-4 flex items-center gap-2 rounded-xl bg-white p-6 shadow-lg">
-          <div className="rounded-full bg-[#DCFCE7] p-3 text-[#16A34A] font-bold">
-            <BsGraphUp size={20} />
-          </div>
-          <div>
-            <p className="text-lg font-bold text-[#111827] sm:text-2xl">98%</p>
-            <p className="text-[11px] font-medium text-[#4B5563] sm:text-sm">
-              Accuracy
-            </p>
+          {/* ACCURACY OVERLAY */}
+          <div className="hero-overlay absolute bottom-4 left-4 sm:bottom-9 sm:left-16 bg-white text-xs sm:text-sm font-semibold shadow-lg flex items-center p-3 sm:p-4 rounded-lg sm:rounded-xl gap-2">
+            <div className="bg-[#DCFCE7] p-2 sm:p-3 rounded-full text-[#16A34A] font-bold">
+              <BsGraphUp size={16} />
+            </div>
+            <div>
+              <p className="font-bold text-lg sm:text-[24px] text-[#111827]">
+                98%
+              </p>
+              <p className="font-medium text-[10px] sm:text-[14px] text-[#4B5563]">
+                Accuracy
+              </p>
+            </div>
           </div>
         </div>
       </div>

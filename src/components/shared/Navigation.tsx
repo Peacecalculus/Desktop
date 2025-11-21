@@ -1,17 +1,45 @@
 "use client";
 
-import { useState } from "react";
-import DesktopNav from "@/components/navigations/DesktopNav";
-import MobileNav from "@/components/navigations/MobileNav";
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import DesktopNav from "../navigations/DesktopNav";
+import MobileNav from "../navigations/MobileNav";
+import { PRIMARY_MAROON } from "../navigations/shared";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white dark:bg-slate-950 shadow-sm">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <DesktopNav />
-        <MobileNav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+    <header className="sticky top-0 z-50 w-full border-b bg-white">
+      <div className="container mx-auto px-4">
+        {/* Mobile Layout: Logo + Menu Icon */}
+        <div className="flex items-center justify-between lg:hidden h-16">
+          <Link href="/" className="flex items-center gap-2 shrink-0">
+            <div
+              className="h-8 w-8 rounded overflow-hidden"
+              style={{ backgroundColor: PRIMARY_MAROON }}
+            >
+              <Image
+                src="/logo.png"
+                alt="StockKeeper Logo"
+                width={32}
+                height={32}
+                className="h-8 w-8 object-cover"
+              />
+            </div>
+            <span className="text-xl font-bold text-slate-900">
+              StockKeeper
+            </span>
+          </Link>
+
+          <MobileNav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        </div>
+
+        {/* Desktop Layout - Full navbar */}
+        <div className="hidden lg:block">
+          <DesktopNav />
+        </div>
       </div>
     </header>
   );

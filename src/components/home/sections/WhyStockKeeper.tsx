@@ -92,7 +92,7 @@ const WhyStockKeeper = () => {
           {features.map((item, index) => (
             <div key={index} className="why-feature flex items-start gap-4">
               <div
-                className={`${item.bg} p-3.5 rounded-[8px] w-fit flex items-center justify-center`}
+                className={`${item.bg} p-3.5 rounded-xl w-fit flex items-center justify-center`}
               >
                 {item.icon}
               </div>
