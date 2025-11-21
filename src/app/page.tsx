@@ -11,6 +11,7 @@ import JoinWaitlistForm from "@/components/waitlist/JoinWaitlistForm";
 import FAQ from "@/components/waitlist/FAQ";
 import Footer from "@/components/waitlist/Footer";
 
+
 export default function WaitlistPage() {
 	const [launchDate] = useState(() => {
 		const date = new Date();
@@ -21,20 +22,6 @@ export default function WaitlistPage() {
 	const handleScrollToJoin = () => {
 		const joinSection = document.getElementById("join");
 		joinSection?.scrollIntoView({ behavior: "smooth" });
-	};
-
-	const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		console.log("Waitlist form submitted!");
-
-		const messageBox = document.getElementById("waitlist-message-box");
-		if (messageBox) {
-			messageBox.textContent = "✅ Success! You have joined the waitlist.";
-			messageBox.classList.remove("hidden");
-			messageBox.classList.add("block");
-			setTimeout(() => messageBox.classList.remove("block"), 5000);
-			setTimeout(() => messageBox.classList.add("hidden"), 5300);
-		}
 	};
 
 	return (

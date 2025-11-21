@@ -60,9 +60,9 @@ This script will:
 Add these secrets to your GitHub repository (Settings → Secrets and variables → Actions):
 
 ```
-SERVER_IP        - Your server's IP address or hostname
-SERVER_USER      - The deploy user (default: deploy)
-SERVER_SSH_KEY   - Private SSH key for the deploy user
+SSH_HOST        - Your server's IP address or hostname
+SSH_USER      - The deploy user (default: deploy)
+SSH_PRIVATE_KEY   - Private SSH key for the deploy user
 ```
 
 To generate SSH keys for the deploy user:
@@ -74,7 +74,7 @@ chmod 600 ~/.ssh/github_deploy
 cat ~/.ssh/github_deploy.pub >> ~/.ssh/authorized_keys
 ```
 
-Copy the contents of `~/.ssh/github_deploy` and add it as `SERVER_SSH_KEY` secret in GitHub.
+Copy the contents of `~/.ssh/github_deploy` and add it as `SSH_PRIVATE_KEY` secret in GitHub.
 
 ### Step 3: Configure Environment Variables
 
@@ -212,7 +212,7 @@ tail -f /var/log/stock-keeping-out.log
 
 ### Deployment fails with "Permission denied"
 
-- Verify `SERVER_SSH_KEY` secret is correct
+- Verify `SSH_PRIVATE_KEY` secret is correct
 - Ensure the deploy user has write permissions to `/var/www`
 
 ### Build fails locally but passes in CI
@@ -288,9 +288,9 @@ git push origin dev
 
 2. Add GitHub Secrets to your repository:
 
-   - `SERVER_IP` - Your server's IP or hostname
-   - `SERVER_USER` - The deploy username (default: deploy)
-   - `SERVER_SSH_KEY` - Private SSH key for the deploy user
+   - `SSH_HOST` - Your server's IP or hostname
+   - `SSH_USER` - The deploy username (default: deploy)
+   - `SSH_PRIVATE_KEY` - Private SSH key for the deploy user
 
 3. On each server, create `.env.local` files:
 

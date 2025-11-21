@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api/v1";
+const BASE_URL = "https://stoqkeep-soma.up.railway.app";
 
 export interface ApiResponse<T = Record<string, unknown>> {
   status: string;
@@ -7,9 +7,15 @@ export interface ApiResponse<T = Record<string, unknown>> {
   status_code: number;
 }
 
-export type EmptyData = Record<string, unknown>;
+// ❗ Keep only THIS version of EmptyData
+export type EmptyData = {
+  message: string;
+};
+
+// ---------- HELPER FUNCTIONS -----------
+
 async function postRequest<T>(endpoint: string, body: Record<string, unknown>, headers?: Record<string, string>): Promise<ApiResponse<T>> {
-  const url = `${BASE_URL}${endpoint}`;
+  const url = `${BASE_URL}${endpoint}`; // remove extra /api/v1
 
   try {
     const response = await fetch(url, {
@@ -22,9 +28,11 @@ async function postRequest<T>(endpoint: string, body: Record<string, unknown>, h
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json().catch(() => null);
+      throw new Error(errorData?.message || `HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+
+    return response.json() as Promise<ApiResponse<T>>;
   } catch (error) {
     console.error("API Request Error:", error);
     throw error;
@@ -39,16 +47,13 @@ async function getRequest<T>(endpoint: string, params?: Record<string, string>):
     Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
   }
 
-  const response = await fetch(url.toString(), {
-    method: "GET",
-  });
+  const response = await fetch(url.toString(), { method: "GET" });
 
   if (!response.ok) {
     try {
       const errorData = await response.json();
       throw new Error(errorData.message || "An error occurred");
-    } catch (e) {
-      console.error("API Request Error:", e);
+    } catch {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
   }
@@ -56,53 +61,44 @@ async function getRequest<T>(endpoint: string, params?: Record<string, string>):
   return response.json() as Promise<ApiResponse<T>>;
 }
 
+// ---------- AUTH RESPONSE TYPES -----------
+
+export type SignupData = {
+  message: string;
+  token: string;
+  userId?: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+  };
+};
+
+export type LoginData = {
+  message: string;
+  accessToken: string;
+  refreshToken?: string;
+  user_id: string;
+  email: string;
+  token?: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+  };
+};
+
 // ---------- AUTH ENDPOINTS ------------
 
-// ✔ Signup
-export interface SignupData {
-  token: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-  };
-}
+export const signup = (data: { name: string; email: string; password: string }) => postRequest<SignupData>("/api/v1/auth/signup", data);
+// Add this to your authService.ts file:
 
-export const signup = (data: { name: string; email: string; password: string }): Promise<ApiResponse<SignupData>> => {
-  return postRequest<SignupData>("/auth/signup", data);
-};
+export const resendVerification = (data: { email: string }) => postRequest<EmptyData>("/api/v1/auth/resend-verification", data);
 
-// ✔ Login
-export interface LoginData {
-  token: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-  };
-}
+export const login = (data: { email: string; password: string }) => postRequest<LoginData>("/api/v1/auth/login", data);
 
-export const login = (data: { email: string; password: string }): Promise<ApiResponse<LoginData>> => {
-  return postRequest<LoginData>("/auth/login", data);
-};
+export const forgotPassword = (data: { email: string }) => postRequest<EmptyData>("/api/v1/auth/forgot-password", data);
 
-// Forgot password
-export const forgotPassword = (data: { email: string }) => {
-  return postRequest<EmptyData>("/auth/forgot-password", data);
-};
+export const resetPassword = (data: { email: string; token: string; newPassword: string }) => postRequest<EmptyData>("/api/v1/auth/reset-password", data);
 
-// Reset password
-export const resetPassword = (data: { email: string; token: string; newPassword: string }) => {
-  return postRequest<EmptyData>("/auth/reset-password", data);
-};
-
-// Logout
-export const logout = (accessToken: string) => {
-  return postRequest<EmptyData>(
-    "/auth/logout",
-    {},
-    {
-      Authorization: `Bearer ${accessToken}`,
-    }
-  );
-};
+export const logout = (accessToken: string) => postRequest<EmptyData>("/api/v1/auth/logout", {}, { Authorization: `Bearer ${accessToken}` });

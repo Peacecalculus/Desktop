@@ -8,11 +8,11 @@ import Testimonials from "@/components/home/sections/Testimonials"
 import WhyStockKeeper from "@/components/home/sections/WhyStockKeeper"
 
 
+
 const page = () => {
   return (
-    
-    <div>
-      <p className="text-gray-500 text-sm">Loading...</p>
+    <div className="w-full">
+      <div className="max-w-[1920px] mx-auto">
         <HomeHero />
         <KeyMetrics />
         <EverythingYouNeedToKnow />
@@ -21,8 +21,9 @@ const page = () => {
         <Testimonials />
         <FAQ />
         <CTA />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default page

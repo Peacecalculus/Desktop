@@ -45,10 +45,8 @@ export default function WaitlistError() {
 								'Invalid email format entered',
 								'Server temporarily unavailable',
 							].map((issue, i) => (
-								<li
-									key={i}
-									className='flex items-start gap-3'>
-									<span className='w-1.5 h-1.5 bg-red-600 rounded-full mt-1.5 flex-shrink-0'></span>
+								<li key={i} className="flex items-start gap-3">
+									<span className="w-1.5 h-1.5 bg-red-600 rounded-full mt-1.5 shrink-0"></span>
 									{issue}
 								</li>
 							))}
@@ -107,8 +105,9 @@ export default function WaitlistError() {
 						</Link>
 
 						<Button
-							className='w-full sm:w-auto px-10 py-4 text-lg font-bold rounded-full border-2 border-[#800020] text-[#800020] hover:bg-[#800020] hover:text-white flex items-center justify-center gap-3 transition-all'>
-							<Mail className='w-6 h-6' />
+							className="w-full sm:w-auto px-10 py-4 text-lg font-bold rounded-full border-2 border-[#800020] text-[#800020] hover:bg-[#800020] hover:text-white flex items-center justify-center gap-3 transition-all"
+						>
+							<Mail className="w-6 h-6" />
 							Contact Support
 						</Button>
 					</div>

@@ -29,7 +29,7 @@ export default function ForgotPasswordPage() {
   >("idle");
   const [message, setMessage] = useState("");
 
-  // Custom colors 
+  // Custom colors
   const PRIMARY_RED = "#800020";
   const TEXT_GRAY_MEDIUM = "#6B7280";
   const TEXT_GRAY_DARK = "#1F2937";
@@ -50,7 +50,7 @@ export default function ForgotPasswordPage() {
     if (!isFormValid || isLoading) return;
 
     setStatus("sending");
-    setMessage(""); 
+    setMessage("");
 
     try {
       const response = await forgotPassword({ email });
@@ -72,10 +72,10 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+    <div className="min-h-screen bg-white flex items-center justify-center p-0">
+      <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
         {/* LEFT SIDE */}
-        <div className={clsx("hidden lg:flex flex-col gap-10 p-10")}>
+        <div className={clsx("hidden lg:flex flex-col gap-10 px-10 py-10")}>
           <div className="flex flex-col items-center justify-center pt-8">
             <Image
               src="/forgot-pass-key.png"
@@ -151,8 +151,8 @@ export default function ForgotPasswordPage() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="px-6 py-10 sm:px-8 flex items-center justify-center bg-[#F9FAFB]">
-          <Card className="w-full border-none shadow-none p-0 max-w-sm mx-auto bg-[#F9FAFB]">
+        <div className="flex items-center justify-center bg-[#F9FAFB]">
+          <Card className="w-full border-none shadow-none px-6 py-10 max-w-sm mx-auto bg-[#F9FAFB]">
             <CardHeader className="px-0 bg-[#F9FAFB]">
               <div className="flex flex-col items-center gap-4">
                 <div
