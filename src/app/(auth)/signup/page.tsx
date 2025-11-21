@@ -12,7 +12,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { resendVerification } from "@/services/authService";
+<<<<<<< HEAD
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+=======
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+>>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { signup, ApiResponse, SignupData } from "@/services/authService";
@@ -49,7 +60,16 @@ export default function SignupPage() {
   const INPUT_BORDER_COLOR = "#D1D5DB";
   const BORDER_DIVIDER = "#E5E7EB";
 
+<<<<<<< HEAD
   const isFormValid = fullName.trim() !== "" && email.trim() !== "" && password.trim().length >= 8 && agreedToTerms && passwordErrors.length === 0;
+=======
+  const isFormValid =
+    fullName.trim() !== "" &&
+    email.trim() !== "" &&
+    password.trim().length >= 8 &&
+    agreedToTerms &&
+    passwordErrors.length === 0;
+>>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
 
   const validatePasswordRules = (pwd: string): string[] => {
     const errors: string[] = [];
@@ -60,107 +80,91 @@ export default function SignupPage() {
     return errors;
   };
 
-  // Handlers for input change to clear errors dynamically
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
-    // Real-time validation check for feedback
     const pwdErrors = validatePasswordRules(newPassword);
     setPasswordErrors(pwdErrors);
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-    // Clear inline error when user starts typing in email field
     setErrors({});
   };
 
- const handleResendVerification = async (userEmail: string) => {
-   try {
-     const res = await resendVerification({ email: userEmail });
-     if (res.status_code === 200) {
-       toast.success("Verification email resent!", {
-         description: "Check your inbox and spam folder again.",
-       });
-     } else {
-       toast.error(res.message || "Failed to resend email.");
-     }
-   } catch (err: unknown) {
-     if (err instanceof Error) {
-       toast.error(err.message);
-     } else {
-       toast.error("Could not reach server to resend email.");
-     }
-   }
- };
+  const handleResendVerification = async (userEmail: string) => {
+    try {
+      const res = await resendVerification({ email: userEmail });
+      if (res.status_code === 200) {
+        toast.success("Verification email resent!", {
+          description: "Check your inbox and spam folder again.",
+        });
+      } else {
+        toast.error(res.message || "Failed to resend email.");
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Could not reach server to resend email.");
+      }
+    }
+  };
 
- const handleSubmit = async (e: React.FormEvent) => {
-   e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-   // Re-validate password just before submission
-   const pwdErrors = validatePasswordRules(password);
-   if (pwdErrors.length > 0) {
-     setPasswordErrors(pwdErrors);
-     return; // stop submission if password invalid
-   } else {
-     setPasswordErrors([]);
-   }
+    const pwdErrors = validatePasswordRules(password);
+    if (pwdErrors.length > 0) {
+      setPasswordErrors(pwdErrors);
+      return;
+    } else {
+      setPasswordErrors([]);
+    }
 
-   if (!isFormValid) return;
+    if (!isFormValid) return;
 
-   setLoading(true);
-   setErrors({}); // reset errors before submit
+    setLoading(true);
+    setErrors({});
 
-   try {
-     const res: ApiResponse<SignupData> = await signup({
-       name: fullName,
-       email,
-       password,
-     });
+    try {
+      const res: ApiResponse<SignupData> = await signup({
+        name: fullName,
+        email,
+        password,
+      });
 
-     // --- 🔑 MODIFIED LOGIC: Account created, prompt for sign-in AND offer resend link 🔑 ---
-     if (res.status_code === 200) {
-       // This logic runs because the backend successfully created the account (status 200)
-       // but is NOT sending the token, hence the need for verification.
+      if (res.status_code === 200) {
+        toast.success(
+          "Account created successfully. Please sign in to continue.",
+          {
+            description:
+              res.message || "Check your email inbox to verify your account.",
+            action: {
+              label: "Resend Link",
+              onClick: () => handleResendVerification(email),
+            },
+            duration: 10000,
+          }
+        );
 
-       // 1. Show the success message and prompt to sign-in.
-       // 2. Add an action button to the toast that calls handleResendVerification.
-       toast.success(
-         "Account created successfully. Please sign in to continue.",
-         {
-           description:
-             res.message || "Check your email inbox to verify your account.",
-           // Add the action button here!
-           action: {
-             label: "Resend Link",
-             onClick: () => handleResendVerification(email),
-           },
-           duration: 10000, // Keep the toast visible longer
-         }
-       );
-
-       // Redirect to the sign-in page after a short delay (so the toast is visible)
-       setTimeout(() => router.push("/signin"), 1000);
-     } else {
-       // API FAILURE HANDLING (Status code is not 200)
-       toast.error(res.message || "Signup failed"); // 👈 TOAST ERROR
-       if (res.message?.toLowerCase().includes("email")) {
-         // 👈 INLINE EMAIL ERROR
-         setErrors({ email: res.message });
-       }
-     }
-     // --- END MODIFIED LOGIC ---
-   } catch (err: unknown) {
-     // NETWORK/OTHER ERROR HANDLING
-     if (err instanceof Error) {
-       toast.error(err.message);
-     } else {
-       toast.error("Signup failed"); // 👈 GENERIC TOAST ERROR
-     }
-   } finally {
-     setLoading(false);
-   }
- };
+        setTimeout(() => router.push("/signin"), 1000);
+      } else {
+        toast.error(res.message || "Signup failed");
+        if (res.message?.toLowerCase().includes("email")) {
+          setErrors({ email: res.message });
+        }
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("Signup failed");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-0">
@@ -257,7 +261,13 @@ export default function SignupPage() {
                       className={clsx("pl-10", `border-[${INPUT_BORDER_COLOR}]`, `focus-visible:ring-offset-0 focus-visible:ring-2 focus-visible:ring-[${PRIMARY_RED}]`)}
                     />
                   </div>
+<<<<<<< HEAD
                   {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
+=======
+                  {errors.email && (
+                    <p className="text-xs text-red-600 mt-1">{errors.email}</p>
+                  )}
+>>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
                 </div>
 
                 {/* PASSWORD */}
@@ -304,6 +314,7 @@ export default function SignupPage() {
                       `focus:ring-2 focus:ring-offset-2 focus:ring-[${PRIMARY_RED}]`
                     )}
                   />
+<<<<<<< HEAD
                   <Label htmlFor="terms" className={clsx("md:text-[10px] text-[4px] flex items-center justify-center font-normal leading-none")}>
                     I agree to the{" "}
                     <Link href="/terms" className={clsx(`text-[${PRIMARY_RED}]`, "underline font-bold")}>
@@ -311,32 +322,77 @@ export default function SignupPage() {
                     </Link>{" "}
                     and{" "}
                     <Link href="/privacy-policy" className={clsx(`text-[${PRIMARY_RED}]`, "underline font-bold")}>
+=======
+                  <Label
+                    htmlFor="terms"
+                    className={clsx(
+                      "md:text-[10px] text-[4px] flex items-center justify-center font-normal leading-none"
+                    )}
+                  >
+                    I agree to the{" "}
+                    <Link
+                      href="/terms"
+                      className={clsx(
+                        `text-[${PRIMARY_RED}]`,
+                        "underline font-bold"
+                      )}
+                    >
+                      Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/privacy-policy"
+                      className={clsx(
+                        `text-[${PRIMARY_RED}]`,
+                        "underline font-bold"
+                      )}
+                    >
+>>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
                       Privacy Policy
                     </Link>
                     .
                   </Label>
                 </div>
 
-                {/* SUBMIT BUTTON (UPDATED CLASSNAMES FOR LOADING STATE) */}
                 <Button
                   type="submit"
                   size="lg"
+<<<<<<< HEAD
                   className={clsx("w-full text-white transition-colors duration-200", `bg-[${PRIMARY_RED}]`, `hover:bg-[#6a001a]`, loading && "opacity-75 cursor-not-allowed")}
+=======
+                  className={clsx(
+                    "w-full text-white transition-colors duration-200",
+                    `bg-[${PRIMARY_RED}]`,
+                    `hover:bg-[#6a001a]`,
+                    loading && "opacity-75 cursor-not-allowed"
+                  )}
+>>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
                   disabled={!isFormValid || loading}
                 >
-                  {/* 👈 LOADING TEXT */}
                   {loading ? "Creating Account..." : "Create Account"}
                 </Button>
               </form>
 
-              {/* OR CONTINUE WITH GOOGLE (UNCHANGED) */}
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
                 <div className={clsx("h-px flex-1", `bg-[${BORDER_DIVIDER}]`)} />
                 <span className={`text-[${TEXT_GRAY_MEDIUM}]`}>Or continue with</span>
                 <div className={clsx("h-px flex-1", `bg-[${BORDER_DIVIDER}]`)} />
               </div>
 
+<<<<<<< HEAD
               <Button variant="outline" size="lg" className={clsx("w-full text-sm", `border-[${INPUT_BORDER_COLOR}]`, `text-[${TEXT_GRAY_DARK}]`, `hover:bg-gray-50`)}>
+=======
+              <Button
+                variant="outline"
+                size="lg"
+                className={clsx(
+                  "w-full text-sm",
+                  `border-[${INPUT_BORDER_COLOR}]`,
+                  `text-[${TEXT_GRAY_DARK}]`,
+                  `hover:bg-gray-50`
+                )}
+              >
+>>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
                 <FaGoogle className={clsx("mr-2 h-4 w-4", `text-[#EF4444]`)} />
                 Continue with Google
               </Button>
