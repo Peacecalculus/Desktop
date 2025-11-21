@@ -1,7 +1,7 @@
 // app/(admin)/components/LowStockAlert.tsx
 export default function LowStockAlert() {
 	return (
-		<div className="bg-red-50 border border-red-200 rounded-2xl p-2 sm:2 shadow-sm mb-8 flex sm:flex-row items-center sm:items-center justify-between gap-4">
+		<div className="bg-red-50 border border-red-200 rounded-2xl p-2 shadow-sm mb-8 flex sm:flex-row items-center sm:items-center justify-between gap-4">
 			<div className="flex items-center gap-4">
 				<span className="p-2 bg-red-500/20 rounded-xl">
 					<i className="w-6 h-6 bg-red-500/80 rounded-full flex items-center justify-center text-white text-xl font-bold">

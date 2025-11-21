@@ -11,13 +11,9 @@ import RecentProductsTable from "@/components/dashboard/RecentProductsTable";
 import { PackageOpen, AlertTriangle, DollarSign, Tags } from "lucide-react";
 
 export default function DashboardShell() {
-	const [sidebarOpen, setSidebarOpen] = useState(false);
 	return (
 		<div className="min-h-screen w-full bg-[#F8F9FB]">
 			<div className="flex">
-				{/* <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        <div className="flex-1 lg:ml-64">
-          <Topbar onToggleSidebar={() => setSidebarOpen(true)} /> */}
 				<main className="px-4 lg:px-6 py-6 space-y-6">
 					{/* Stats */}
 

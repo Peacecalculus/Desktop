@@ -29,7 +29,7 @@ const useAuth = () => {
 };
 
 const UNAUTHENTICATED_REDIRECT = "/signin";
-const PROTECTED_PATHS = ["/dashboards", "/inventory", "/profile"];
+const PROTECTED_PATHS = ["/dashboard", "/inventory", "/profile"];
 
 export default function ProtectedRoute({
   children,

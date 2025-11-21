@@ -1,63 +1,13 @@
-import { ArrowRight, ArrowLeft, PackageOpen, AlertTriangle, DollarSign, Tags, Filter, Search } from "lucide-react";
-import { useState } from "react";
+"use client";
 
-const PRODUCTS = [
-	{
-		id: 1,
-		name: "Wireless Headphones",
-		category: "Electronics",
-		sku: "WH-2847",
-		categoryType: "Audio",
-		qty: 342,
-		status: "In Stock",
-		icon: "🎧",
-		iconBg: "bg-yellow-100"
-	},
-	{
-		id: 2,
-		name: "Smart Watch Pro",
-		category: "Wearables",
-		sku: "SW-1823",
-		categoryType: "Wearables",
-		qty: 18,
-		status: "Low Stock",
-		icon: "⌚",
-		iconBg: "bg-gray-100"
-	},
-	{
-		id: 3,
-		name: "Designer Sunglasses",
-		category: "Accessories",
-		sku: "SG-4521",
-		categoryType: "Fashion",
-		qty: 156,
-		status: "In Stock",
-		icon: "🕶️",
-		iconBg: "bg-gray-100"
-	},
-	{
-		id: 4,
-		name: "Running Shoes",
-		category: "Footwear",
-		sku: "RS-7834",
-		categoryType: "Sports",
-		qty: 89,
-		status: "Medium",
-		icon: "👟",
-		iconBg: "bg-pink-100"
-	},
-	{
-		id: 5,
-		name: "Leather Sneakers",
-		category: "Footwear",
-		sku: "LS-9012",
-		categoryType: "Fashion",
-		qty: 234,
-		status: "In Stock",
-		icon: "👞",
-		iconBg: "bg-gray-100"
-	}
-];
+import {
+	ArrowRight,
+	ArrowLeft,
+	Filter,
+	Search,
+} from "lucide-react";
+import { useState, useMemo } from "react";
+import { useProductsStore } from "@/store/productsStore";
 
 function StatusBadge({ status }) {
 	const variants = {
@@ -65,7 +15,6 @@ function StatusBadge({ status }) {
 		"Low Stock": { bg: "bg-red-50", text: "text-red-600" },
 		"Medium": { bg: "bg-yellow-50", text: "text-yellow-600" },
 	};
-
 	const { bg, text } = variants[status] || variants["In Stock"];
 	return (
 		<span className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium ${bg} ${text}`}>
@@ -75,12 +24,17 @@ function StatusBadge({ status }) {
 }
 
 export default function RecentProductsTable() {
-	const [searchTerm, setSearchTerm] = useState("");
-	const [currentPage, setCurrentPage] = useState(1);
+	// 🧠 Get products + actions from store
+	const { products, checkIn, checkOut } = useProductsStore();
 
-	const filtered = PRODUCTS.filter((p) =>
-		p.name.toLowerCase().includes(searchTerm.toLowerCase())
-	);
+	const [searchTerm, setSearchTerm] = useState("");
+
+	// 🔍 Filter products dynamically
+	const filtered = useMemo(() => {
+		return products.filter((p) =>
+			p.name.toLowerCase().includes(searchTerm.toLowerCase())
+		);
+	}, [products, searchTerm]);
 
 	return (
 		<div className="rounded-2xl bg-white shadow-sm overflow-hidden">
@@ -118,6 +72,7 @@ export default function RecentProductsTable() {
 							<th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
 						</tr>
 					</thead>
+
 					<tbody className="divide-y divide-gray-100">
 						{filtered.map((product) => (
 							<tr key={product.id} className="hover:bg-gray-50 transition-colors">
@@ -132,20 +87,30 @@ export default function RecentProductsTable() {
 										</div>
 									</div>
 								</td>
+
 								<td className="px-6 py-4 text-gray-600">{product.sku}</td>
 								<td className="px-6 py-4 text-gray-600">{product.categoryType}</td>
 								<td className="px-6 py-4 text-gray-900 font-medium">{product.qty} units</td>
 								<td className="px-6 py-4 whitespace-nowrap">
 									<StatusBadge status={product.status} />
 								</td>
+
 								<td className="px-6 py-4">
 									<div className="flex items-center gap-2">
-										<button className="flex items-center justify-center gap-1 px-2 py-1 bg-[#7C1D3D] text-white text-xs font-medium rounded-lg hover:bg-[#661832] transition whitespace-nowrap">
+										{/* 🟥 Check OUT */}
+										<button
+											onClick={() => checkOut(product.id)}
+											className="flex items-center justify-center gap-1 px-2 py-1 bg-[#7C1D3D] text-white text-xs font-medium rounded-lg hover:bg-[#661832] transition whitespace-nowrap"
+										>
 											<ArrowLeft className="w-4 h-4" />
 											<span className="text-xs whitespace-nowrap">Check Out</span>
 										</button>
 
-										<button className="flex items-center justify-center gap-1 px-2 py-1 text-gray-400 hover:text-gray-600 transition whitespace-nowrap">
+										{/* 🟩 Check IN */}
+										<button
+											onClick={() => checkIn(product.id)}
+											className="flex items-center justify-center gap-1 px-2 py-1 text-gray-400 hover:text-gray-600 transition whitespace-nowrap"
+										>
 											<ArrowRight className="w-4 h-4" />
 											<span className="text-xs whitespace-nowrap">Check In</span>
 										</button>
@@ -157,10 +122,10 @@ export default function RecentProductsTable() {
 				</table>
 			</div>
 
-			{/* Footer */}
+			{/* Footer (unchanged placeholder) */}
 			<div className="flex items-center justify-between px-6 py-4 border-t">
 				<p className="text-sm text-gray-500">
-					Showing 1 to 5 of 2,847 products
+					Showing {filtered.length} of {products.length} products
 				</p>
 				<div className="flex items-center gap-2">
 					<button className="bg-gray-500/10 px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition">
