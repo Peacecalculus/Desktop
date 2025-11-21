@@ -9,7 +9,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 	const path = usePathname();
 	const isWaitlistPage =
-		path === '/' || path === '/waitlist/success' || path === '/waitlist/error';
+		path === '/' || path === '/waitlist/success' || path === '/waitlist/error' || path === '/dashboard';
 
 	return (
 		<html lang='en'>
