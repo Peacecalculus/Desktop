@@ -81,9 +81,9 @@ const OrganizationsGrid: React.FC<OrganizationsGridProps> = ({
           <Image
             src="/assets/workspace.jpg"
             alt="Create Organization"
-            width={300}
-            height={300}
-            className="hidden md:block ml-8 rounded-lg"
+            width={200}
+            height={200}
+            className="hidden md:block ml-8"
           />
         </div>
       </div>

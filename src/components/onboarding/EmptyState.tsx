@@ -56,8 +56,8 @@ const EmptyState: React.FC<{ onCreateOrg: () => void }> = ({ onCreateOrg }) => (
         <Image
           src="/assets/workspace.jpg"
           alt="Create Organization"
-          width={300}
-          height={300}
+          width={200}
+          height={200}
           className="hidden md:block ml-8 rounded-lg"
         />
       </div>
