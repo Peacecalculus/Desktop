@@ -17,17 +17,7 @@ export default function GlobalError({
             {/* 500 Container styled like your screenshot's central box */}
             <div className="p-12  border border-gray-100">
               {/* Alert Icon Area */}
-<<<<<<< HEAD
               <Image src="/five-warning.png" alt="User icon" width={52} height={52} className="h-35 w-35 object-cover" />
-=======
-              <Image
-                src="/assets/five-warning.png"
-                alt="User icon"
-                width={52}
-                height={52}
-                className="h-35 w-35 object-cover"
-              />
->>>>>>> 77a5f40 (fix: correct image paths, restructure onboarding & landing page)
 
               <h1 className="text-4xl font-bold mb-3">500</h1>
               <h2 className="text-xl font-semibold mb-6">Internal Server Error</h2>
