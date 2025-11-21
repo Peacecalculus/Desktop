@@ -12,18 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { resendVerification } from "@/services/authService";
-<<<<<<< HEAD
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-=======
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
->>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { signup, ApiResponse, SignupData } from "@/services/authService";
@@ -32,20 +21,12 @@ function clsx(...args: unknown[]) {
   return args.filter(Boolean).join(" ");
 }
 
-<<<<<<< HEAD
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface SignupResponse {
   status_code: number;
   message?: string;
   data?: Record<string, unknown>;
 }
-=======
-// interface SignupResponse {
-//   status_code: number;
-//   message?: string;
-//   data?: Record<string, unknown>;
-// }
->>>>>>> 77a5f40 (fix: correct image paths, restructure onboarding & landing page)
 
 export default function SignupPage() {
   const router = useRouter();
@@ -60,30 +41,14 @@ export default function SignupPage() {
 
   // Custom colors
   const PRIMARY_RED = "#800020";
-<<<<<<< HEAD
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const SUCCESS_GREEN_BG = "#F0FDF4";
-=======
-  const LIGHT_RED_BG = "#FDF2F4";
-  const LIGHT_RED_BORDER = "#F9D0D9";
-
->>>>>>> 77a5f40 (fix: correct image paths, restructure onboarding & landing page)
   const SUCCESS_GREEN_BORDER = "#BBF7D0";
   const TEXT_GRAY_MEDIUM = "#6B7280";
   const TEXT_GRAY_DARK = "#1F2937";
   const INPUT_BORDER_COLOR = "#D1D5DB";
   const BORDER_DIVIDER = "#E5E7EB";
 
-<<<<<<< HEAD
   const isFormValid = fullName.trim() !== "" && email.trim() !== "" && password.trim().length >= 8 && agreedToTerms && passwordErrors.length === 0;
-=======
-  const isFormValid =
-    fullName.trim() !== "" &&
-    email.trim() !== "" &&
-    password.trim().length >= 8 &&
-    agreedToTerms &&
-    passwordErrors.length === 0;
->>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
 
   const validatePasswordRules = (pwd: string): string[] => {
     const errors: string[] = [];
@@ -186,38 +151,13 @@ export default function SignupPage() {
         {/* LEFT SIDE - PROMOTIONAL */}
         <div className={clsx("hidden lg:flex flex-col gap-8 px-10 py-10")}>
           <div className="relative w-full aspect-4/3 rounded-lg overflow-hidden">
-<<<<<<< HEAD
             <Image src="/inventory-management.png" alt="Warehouse shelves with stock inventory" fill className="object-cover" />
-=======
-            <Image
-              src="/assets/inventory-management.png"
-              alt="Warehouse shelves with stock inventory"
-              fill
-              className="object-cover"
-            />
->>>>>>> 77a5f40 (fix: correct image paths, restructure onboarding & landing page)
           </div>
 
           <div className="space-y-6 ml-10">
             <div className="flex items-center gap-3">
-<<<<<<< HEAD
               <div className={clsx("inline-flex h-10 w-10 items-center justify-center rounded-lg text-white", `bg-[${PRIMARY_RED}]`)}>
                 <Image src="/logo.png" alt="StockKeeper Logo" width={32} height={32} className="h-8 w-8 object-cover" />
-=======
-              <div
-                className={clsx(
-                  "inline-flex h-10 w-10 items-center justify-center rounded-lg text-white",
-                  `bg-[${PRIMARY_RED}]`
-                )}
-              >
-                <Image
-                  src="/assets/logo.png"
-                  alt="StockKeeper Logo"
-                  width={32}
-                  height={32}
-                  className="h-8 w-8 object-cover"
-                />
->>>>>>> 77a5f40 (fix: correct image paths, restructure onboarding & landing page)
               </div>
               <div>
               </div>
@@ -300,13 +240,7 @@ export default function SignupPage() {
                       className={clsx("pl-10", `border-[${INPUT_BORDER_COLOR}]`, `focus-visible:ring-offset-0 focus-visible:ring-2 focus-visible:ring-[${PRIMARY_RED}]`)}
                     />
                   </div>
-<<<<<<< HEAD
                   {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
-=======
-                  {errors.email && (
-                    <p className="text-xs text-red-600 mt-1">{errors.email}</p>
-                  )}
->>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
                 </div>
 
                 {/* PASSWORD */}
@@ -353,7 +287,6 @@ export default function SignupPage() {
                       `focus:ring-2 focus:ring-offset-2 focus:ring-[${PRIMARY_RED}]`
                     )}
                   />
-<<<<<<< HEAD
                   <Label htmlFor="terms" className={clsx("md:text-[10px] text-[4px] flex items-center justify-center font-normal leading-none")}>
                     I agree to the{" "}
                     <Link href="/terms" className={clsx(`text-[${PRIMARY_RED}]`, "underline font-bold")}>
@@ -361,32 +294,6 @@ export default function SignupPage() {
                     </Link>{" "}
                     and{" "}
                     <Link href="/privacy-policy" className={clsx(`text-[${PRIMARY_RED}]`, "underline font-bold")}>
-=======
-                  <Label
-                    htmlFor="terms"
-                    className={clsx(
-                      "md:text-[10px] text-[4px] flex items-center justify-center font-normal leading-none"
-                    )}
-                  >
-                    I agree to the{" "}
-                    <Link
-                      href="/terms"
-                      className={clsx(
-                        `text-[${PRIMARY_RED}]`,
-                        "underline font-bold"
-                      )}
-                    >
-                      Terms of Service
-                    </Link>{" "}
-                    and{" "}
-                    <Link
-                      href="/privacy-policy"
-                      className={clsx(
-                        `text-[${PRIMARY_RED}]`,
-                        "underline font-bold"
-                      )}
-                    >
->>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
                       Privacy Policy
                     </Link>
                     .
@@ -396,16 +303,7 @@ export default function SignupPage() {
                 <Button
                   type="submit"
                   size="lg"
-<<<<<<< HEAD
                   className={clsx("w-full text-white transition-colors duration-200", `bg-[${PRIMARY_RED}]`, `hover:bg-[#6a001a]`, loading && "opacity-75 cursor-not-allowed")}
-=======
-                  className={clsx(
-                    "w-full text-white transition-colors duration-200",
-                    `bg-[${PRIMARY_RED}]`,
-                    `hover:bg-[#6a001a]`,
-                    loading && "opacity-75 cursor-not-allowed"
-                  )}
->>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
                   disabled={!isFormValid || loading}
                 >
                   {loading ? "Creating Account..." : "Create Account"}
@@ -418,20 +316,7 @@ export default function SignupPage() {
                 <div className={clsx("h-px flex-1", `bg-[${BORDER_DIVIDER}]`)} />
               </div>
 
-<<<<<<< HEAD
               <Button variant="outline" size="lg" className={clsx("w-full text-sm", `border-[${INPUT_BORDER_COLOR}]`, `text-[${TEXT_GRAY_DARK}]`, `hover:bg-gray-50`)}>
-=======
-              <Button
-                variant="outline"
-                size="lg"
-                className={clsx(
-                  "w-full text-sm",
-                  `border-[${INPUT_BORDER_COLOR}]`,
-                  `text-[${TEXT_GRAY_DARK}]`,
-                  `hover:bg-gray-50`
-                )}
-              >
->>>>>>> 0227b0c (chore: update landing, onboarding, auth pages and fix waitlist success)
                 <FaGoogle className={clsx("mr-2 h-4 w-4", `text-[#EF4444]`)} />
                 Continue with Google
               </Button>
