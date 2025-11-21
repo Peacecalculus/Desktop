@@ -267,7 +267,7 @@ git push origin dev
 
 - Deployments typically take 2-5 minutes
 - Build job runs on `hng-13-runner` (faster)
-- Deploy job runs on `hng-13-runner`
+- Deploy job runs on `ubuntu-latest`
 - Both .next build and node_modules are cached by GitHub Actions
 
 ## Security Notes
